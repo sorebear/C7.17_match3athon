@@ -26,9 +26,9 @@ body{
 }
 #iphone > img {
     position: absolute;
-    right: 25%;
-    height: 110%;
-    top: -5%;
+    right: 40%;
+    z-index: -1;
+    width: 24%;
 }
 #desk_space_left > img{
     height: 50%;
@@ -44,4 +44,21 @@ body{
     right: 15%;
     bottom: 10%;
 }
-
+#iphoneScreen{
+    width: 20.9%;
+    height: 66%;
+    position: absolute;
+    left: 37.48%;
+    top: 20.3%;
+    z-index: -1;
+}
+#scoreSection{
+    background-size: 100%;
+    background-repeat: no-repeat;
+    width: 20.8%;
+    height: 8.1%;
+    position: absolute;
+    left: 37.54%;
+    top: 12.2%;
+    z-index: -1;
+}

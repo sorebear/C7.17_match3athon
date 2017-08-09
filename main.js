@@ -14,7 +14,7 @@ var game = {
                 var newDiv = $("<div>").addClass("emojiContainer " + startRow +"x" + startColumn);
                 var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg");
                 newDiv.append(newImg);
-                $('#iphone').append(newDiv);
+                $('#iphoneScreen').append(newDiv);
             }
         }
     },
@@ -56,7 +56,7 @@ var game = {
     firstSelection: function(imoji_object) {
         //Do Stuff
         //1. Highlight the selected Emoji on the DOM in some way
-        $(emoji_object).css(box-shadow: 0 0 1px  1px white;)      //change to add class
+        $(emoji_object).css("box-shadow: 0 0 1px  1px white");      //change to add class
         //2. Highlight all of the adjacent Emojis on the Dom in another way
         game.firstEmojiSelected = this; //Mark that a first emoji has been selected
     },
