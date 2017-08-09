@@ -5,3 +5,7 @@
 .emojiContainer {
     width: 12.4%;
 }
+
+.readyToDestroy > img {
+    background-color: red;
+}
