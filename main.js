@@ -80,7 +80,6 @@ var game = {
     updateScore: function() {
         displayCurrentScore();
     }
-
 };
 
 function Emoji(name) {
