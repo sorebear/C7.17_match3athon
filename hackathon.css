@@ -24,11 +24,11 @@ body{
     height: 100%;
     width: 24%;
 }
-#iphone > img{
-    width: 110%;
-    position: relative;
-    right: 10%;
-    bottom: 7%;
+#iphone > img {
+    position: absolute;
+    right: 25%;
+    height: 110%;
+    top: -5%;
 }
 #desk_space_left > img{
     height: 50%;
