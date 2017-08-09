@@ -20,7 +20,6 @@ body{
     width: 24%;
 }
 #iphone > img{
-    height: 100%;
     width: 110%;
     position: relative;
     right: 10%;
@@ -40,5 +39,5 @@ body{
     position: relative;
     right: 15%;
     bottom: 10%;
-    
 }
+

@@ -6,9 +6,19 @@ var game = {
     //METHOD FOR SETTING UP THE GAME UPON LOAD
     init: function() {
         //Will map out the Emoji objects onto the map
-        game.clickHandler() //Initializes the clickHandler on game start.
+        game.clickHandler(); //Initializes the clickHandler on game start.
+        for (var startRow = 0; startRow < 8; startRow++) {
+            for (var startColumn = 0; startColumn < 8; startColumn++) {
+                var newEmoji = game.generateRandomEmoji();
+                game.gameMap[startRow][startColumn] = newEmoji;
+                var newDiv = $("<div>").addClass("emojiContainer " + startRow +"x" + startColumn);
+                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg");
+                newDiv.append(newImg);
+                $('#iphone').append(newDiv);
+            }
+        }
     },
-    emojiArray: [], //This will hold all of the different types of Emoji's
+    emojiArray: ["cool", "happy", "evil", "hearteyes", "laugh"], //This will hold all of the different types of Emoji's
     specialEmojiArray:[],
     //DESIGN SYNCH UP REQUIRED - Make sure the image names and the names in the Emoji Array are the same
     generateEmoji: function(name) {
@@ -16,25 +26,26 @@ var game = {
         return generatedEmoji;  //Returns the newly created Emoji Object
     },
     generateRandomEmoji: function() {
-        var randomNumber = Math.floor(Math.random() * emojiArray.length); //Randomly selects an Emoji from the Emoji Array
-        generateEmoji(emojiArray[randomNumber]); //Calls the generateEmoji Method, passing in the randomly selected Emoji
+        var randomNumber = Math.floor(Math.random() * game.emojiArray.length); //Randomly selects an Emoji from the Emoji Array
+        return game.generateEmoji(game.emojiArray[randomNumber]); //Calls the generateEmoji Method, passing in the randomly selected Emoji
     },
-    gameMap: [], //This will be a multi-dimensional array (8x8) to hold the Emoji objects.
+    gameMap: [[], [], [], [], [], [], [], []], //This will be a multi-dimensional array (8x8) to hold the Emoji objects.
     //DESIGN SYNCH UP REQUIRED - Make sure the Object positions and the DIV class names synch up.
 
 
     //VARIABLES AND METHODS FOR HANDLING EMOJI CLICKS
     firstEmojiSelected: null, //A Boolean to track whether a click is the 1st or 2nd Emoji selected
     clickHandler: function() {
-        $('.gameBoard').on('click', 'emoji', function() {
-            emojiSelector(); //A click handler that will call the emojiSelection Method on click
+        $('#iphone').on('click', '.emojiImg', function() {
+            console.log('Emoji was clicked');
+            game.emojiSelector(); //A click handler that will call the emojiSelection Method on click
         })
     },
     emojiSelector: function() {
         //Checks to see if this is the first or second emoji clicked
-        if (firstEmojiSelected === null) {
+        if (game.firstEmojiSelected === null) {
             game.firstSelection(); //If there is already a first selection, launch the secondSelection Method
-        } else if ( ) { //check if second Emoji is a valid selection
+        } else { //check if second Emoji is a valid selection
             game.secondSelection(); //Otherwise, launch the firstSelection Method
         }
     },
@@ -46,13 +57,13 @@ var game = {
     },
     secondSelection: function() {
         //Swap the two emojis on the DOM and in the array
-        checkForMatches(); //Check to see if a match was made.
+        game.checkForMatches(); //Check to see if a match was made.
         //If no check was made, swap the two Emojis back.
         game.firstEmojiSelected = null; //Re-Initialize the firstSelection boolean
     },
     checkForMatches: function() {
         //Check to see if there are any matches
-        destroyMatched() // If matches were made, execute the destroyMatched() Method
+        game.destroyMatched() // If matches were made, execute the destroyMatched() Method
     },
     destroyMatched: function() {
         //destroy all of the matching Emojis
@@ -60,8 +71,8 @@ var game = {
     },
     collapse: function() {
         //Shift down all of the Emojis above the collapsed space
-        game.generateRandomEmoji()  //Call the Method to create a random Emoji to fill in the newly created space
-        game.checkForMatches() //Call the checkForMatches Method to see if any new matches were made
+        game.generateRandomEmoji();  //Call the Method to create a random Emoji to fill in the newly created space
+        //game.checkForMatches() //Call the checkForMatches Method to see if any new matches were made
     },
     currentScore: 0,
     highScore: 0,
