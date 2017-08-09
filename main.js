@@ -44,14 +44,19 @@ var game = {
     emojiSelector: function() {
         //Checks to see if this is the first or second emoji clicked
         if (game.firstEmojiSelected === null) {
-            game.firstSelection(); //If there is already a first selection, launch the secondSelection Method
+            game.firstEmojiSelected  = $(this).click();
+            game.firstSelection(this.firstEmojiSelected); //If there is already a first selection, launch the secondSelection Method
         } else { //check if second Emoji is a valid selection
             game.secondSelection(); //Otherwise, launch the firstSelection Method
+            game.secondEmojiSelected = $(this).click();
+            game.secondSelection(this.secondEmojiSelected); //Otherwise, launch the firstSelection Method
+
         }
     },
-    firstSelection: function() {
+    firstSelection: function(imoji_object) {
         //Do Stuff
         //1. Highlight the selected Emoji on the DOM in some way
+        $(emoji_object).css(box-shadow: 0 0 1px  1px white;)      //change to add class
         //2. Highlight all of the adjacent Emojis on the Dom in another way
         game.firstEmojiSelected = this; //Mark that a first emoji has been selected
     },
@@ -133,6 +138,8 @@ var game = {
         game.generateRandomEmoji();  //Call the Method to create a random Emoji to fill in the newly created space
         //game.checkForMatches() //Call the checkForMatches Method to see if any new matches were made
     },
+    firstImojiSelected: null,
+    secondImojiSelected: null,
     currentScore: 0,
     highScore: 0,
     displayCurrentScore: function() {},
