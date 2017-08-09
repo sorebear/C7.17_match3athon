@@ -62,15 +62,10 @@ var game = {
     firstSelection: function(imoji_object) {
         //Do Stuff
         //1. Highlight the selected Emoji on the DOM in some way
-<<<<<<< HEAD
-        $(emoji_object).css("box-shadow: 0 0 1px  1px white");      //change to add class
-=======
-
         //$(emoji_object).css('box-shadow: 0 0 1px  1px white;')   ;   //change to add class
 
         $(emoji_object).css('box-shadow', '0 0 1px  1px white');      //change to add class
 
->>>>>>> 6cf61f1dd3289922b17dd4d79a7ba599bef77f54
         //2. Highlight all of the adjacent Emojis on the Dom in another way
         //firstEmojiSelected = this; //Mark that a first emoji has been selected
     },
