@@ -1,4 +1,7 @@
-html, body { height: 100%; }
+html, body {
+    height: 100%;
+    width: 100%;
+}
 
 div{
     display: inline-block;
@@ -8,6 +11,7 @@ body{
     text-align: center;
 }
 #desk_space_left{
+    vertical-align: top;
     height: 100%;
     width: 25%;
 }
@@ -16,26 +20,25 @@ body{
     width: 50%;
 }
 #desk_space_right{
+    vertical-align: top;
     height: 100%;
     width: 24%;
 }
 #iphone > img{
-    height: 100%;
     width: 110%;
     position: relative;
     right: 10%;
-
+    bottom: 7%;
 }
 #desk_space_left > img{
     height: 50%;
-    width: 55%;
+    width: 57%;
     position: relative;
-    bottom: 30%;
-    left: 15%;
+    top: 20%;
     transform: rotate(30deg);
 }
 #desk_space_right > img{
-    height: 90%;
+    height: 115%;
     transform: rotate(-25deg);
     position: relative;
     right: 15%;
