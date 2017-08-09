@@ -43,29 +43,38 @@ var game = {
     },
     emojiSelector: function() {
         //Checks to see if this is the first or second emoji clicked
+        console.log('in emoji Selector');
         if (game.firstEmojiSelected === null) {
+            //game.firstEmojiSelected  = $(this).click();
+            //game.firstSelection(firstEmojiSelected); //If there is already a first selection, launch the secondSelection Method
+
             game.firstEmojiSelected = $(this).attr("position");
             console.log(game.firstEmojiSelected);
             //game.firstSelection(this.firstEmojiSelected); //If there is already a first selection, launch the secondSelection Method
+
         } else { //check if second Emoji is a valid selection
-            game.secondSelection(); //Otherwise, launch the firstSelection Method
-            game.secondEmojiSelected = $(this).click();
-            game.secondSelection(this.secondEmojiSelected); //Otherwise, launch the firstSelection Method
+            //game.secondSelection(); //Otherwise, launch the firstSelection Method
+            //game.secondEmojiSelected = $(this).click();
+            //game.secondSelection(); //Otherwise, launch the firstSelection Method ;;;secondEmojiSelected
 
         }
     },
     firstSelection: function(imoji_object) {
         //Do Stuff
         //1. Highlight the selected Emoji on the DOM in some way
+
+        //$(emoji_object).css('box-shadow: 0 0 1px  1px white;')   ;   //change to add class
+
         $(emoji_object).css('box-shadow', '0 0 1px  1px white');      //change to add class
+
         //2. Highlight all of the adjacent Emojis on the Dom in another way
-        game.firstEmojiSelected = this; //Mark that a first emoji has been selected
+        //firstEmojiSelected = this; //Mark that a first emoji has been selected
     },
     secondSelection: function() {
         //Swap the two emojis on the DOM and in the array
-        game.checkForMatches(); //Check to see if a match was made.
+        //game.checkForMatches(); //Check to see if a match was made.
         //If no check was made, swap the two Emojis back.
-        game.firstEmojiSelected = null; //Re-Initialize the firstSelection boolean
+        //game.firstEmojiSelected = null; //Re-Initialize the firstSelection boolean
     },
     checkForMatches: function() {
         var tempHoldImg = null;
