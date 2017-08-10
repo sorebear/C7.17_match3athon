@@ -60,18 +60,26 @@ body{
     position: relative;
     right: 15%;
     bottom: 10%;
-    z-index: -1;
 }
 #post_it_note{
+    background-image: url("images/postitnote.png");
+    background-size: contain;
+    background-repeat: no-repeat;
     position: absolute;
     width: 15%;
-    height: 25%;
+    height: 31%;
     bottom:20%;
     right: 23%;
 }
-#post_it_note > #note{
-    width: 100%;
+#post_it_note > #postittext{
+    font-family: "Lucida Handwriting";
+    height: 58%;
+    width: 68%;
+    position: absolute;
+    left: 13%;
+    bottom: 25%;
 }
+
 
 #iphoneScreen{
     width: 20.9%;
@@ -106,9 +114,9 @@ body{
     border-radius: 28px;
     font-family: 'Georgia';
     color: #ffffff;
-    position: fixed;
+    position: absolute;
     top: 45%;
-    left:44.5%;
+    left: 34%;
     font-size: 32px;
     animation: beat .6s infinite alternate;
     transform-origin: center;
@@ -140,7 +148,7 @@ body{
     position: absolute;
     left: 37.5%;
     top: 12.2%;
-    z-index: -1;
+    z-index: 0;
     text-align: center;
     font-family: Phosphate;
     font-size: xx-large;
@@ -157,7 +165,7 @@ body{
     position: absolute;
     left: 37.5%;
     top: 79.5%;
-    z-index: -1;
+    z-index: 0;
     background: #006eb8;
     background-image: -moz-linear-gradient(top, #28aafa, #006eb8);
     background-image: -ms-linear-gradient(top, #28aafa, #006eb8);
