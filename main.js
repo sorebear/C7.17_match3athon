@@ -56,8 +56,6 @@ var game = {
             console.log('second emoji assigned:  ' + game.secondEmojiSelected);
             game.secondSelection(emoji); //Otherwise, launch the firstSelection Method
             game.secondEmojiSelected = $(emoji).attr("position");
-
-
         }
     },
     firstSelection: function(emoji) {
@@ -845,7 +843,6 @@ var game = {
     checkForMatches: function() {
         var tempHoldImg = null;
         var tempHoldImg2 = null;
-        // var argumentsToPass = [];
         for (var rowCounter = 7; rowCounter > 1; rowCounter--) {
             for (var columnCounter = 0; columnCounter < 8; columnCounter++) {
                 var currentPositionImg = game.gameMap[columnCounter][rowCounter].name;
@@ -889,13 +886,18 @@ var game = {
             tempHoldImg=null;
             tempHoldImg2=null;
         }
-        setTimeout(function(){
-            game.destroyEmojis();
-            for (var i = 0; i < game.objectsToDestroyFromGameMap.length; i++) {
-                game.gameMap[game.objectsToDestroyFromGameMap[i][0]].splice(game.objectsToDestroyFromGameMap[i][1], 1);
-            }
-            game.objectsToDestroyFromGameMap = [];
-        }, 500);
+        if (game.objectsToDestroyFromGameMap.length === 0) {
+            return false;
+            console.log("I am done running");
+        } else {
+            setTimeout(function () {
+                for (var i = 0; i < game.objectsToDestroyFromGameMap.length; i++) {
+                    game.gameMap[game.objectsToDestroyFromGameMap[i][0]].splice(game.objectsToDestroyFromGameMap[i][1], 1);
+                }
+                game.destroyEmojis();
+            }, 500);
+            return true;
+        }
     },
     setMatchedToBeDestroyed: function(startingRow, startingColumn, matchingEmoji, direction) {
         if (direction === 'vertical') {
@@ -924,7 +926,6 @@ var game = {
                     nextImage = game.gameMap[startingColumn][startingRow - nextImagePosition].name;
                 }
             }
-            //game.score.tempScoreMultiplyer += (nextImagePosition - 3)
         } else {
             if (!($("div[position=" + startingRow + "x" + (startingColumn-2) + "]").hasClass('readyToDestroy'))) {
                 $("div[position=" + startingRow + "x" + (startingColumn-2) + "]").addClass('readyToDestroy');
@@ -951,18 +952,46 @@ var game = {
                     nextImage = game.gameMap[startingColumn+nextImagePosition][startingRow].name;
                 }
             }
-            //game.score.tempScoreMultiplyer += (nextImagePosition - 1)
         }
     },
     destroyEmojis: function() {
-        $(".readyToDestroy").empty();
+        $(".readyToDestroy").removeClass('readyToDestroy').empty();
         game.score.updateScore();
+        game.objectsToDestroyFromGameMap = [];
+        setTimeout(function () {
+            game.collapse();
+        }, 500);
     },
     collapse: function() {
+        for (var column = 0; column < 8; column ++) {
+            for (var row = 0; row < 8; row++) {
+                if ($('[position=' + row + 'x' + column + ']').is(":empty")) {
+                    var findNextImage = row;
+                    while (row < 8 && $('[position=' + findNextImage + 'x' + column + ']').is(":empty")) {
+                        findNextImage++
+                    }
+                    $('[position=' + findNextImage + 'x' + column + '] > img').remove().appendTo($('[position=' + row + 'x' + column + ']'));
+                }
+            }
+        }
+        setTimeout(function () {
+            game.repopulate();
+        }, 500);
 
-
-        game.generateRandomEmoji();  //Call the Method to create a random Emoji to fill in the newly created space
-        //game.checkForMatches() //Call the checkForMatches Method to see if any new matches were made
+    },
+    repopulate: function() {
+        for (var column = 0; column < 8; column ++) {
+            for (var row = game.gameMap[column].length; row < 8; row++) {
+                var newEmoji = game.generateRandomEmoji();
+                game.gameMap[column][row] = newEmoji;
+                var newDiv = $("<div>").addClass("emojiContainer").attr("position", row +"x"+ column);
+                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg");
+                $("[position=" + row + "x" + column + "]").append(newImg);
+            }
+        }
+        setTimeout(function () {
+            game.checkForMatches();
+        }, 500);
     },
     score: {
         tempScore: 0,
