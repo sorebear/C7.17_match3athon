@@ -1,7 +1,12 @@
 .emojiContainer > img {
     width: 100%;
+    margin-top: 25%;
 }
 
 .emojiContainer {
     width: 12.4%;
+}
+
+.readyToDestroy > img {
+    background-color: red;
 }
