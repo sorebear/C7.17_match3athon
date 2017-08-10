@@ -27,7 +27,7 @@ body{
 #iphone > img {
     position: absolute;
     right: 40%;
-    z-index: -1;
+    z-index: 0;
     width: 24%;
     height: 98%;
     top: 1%;
@@ -83,16 +83,32 @@ body{
     color: #ffffff;
     position: fixed;
     top: 45%;
-    left:45%;
+    left:44.5%;
     font-size: 32px;
+    animation: beat .6s infinite alternate;
+    transform-origin: center;
+
 }
 #initialOverlay > button:hover{
-    animation: beat .6s infinite alternate;
+    animation:spin .3s linear infinite;
     transform-origin: center;
 }
 #initialOverlay > button:focus{
     outline: none;
 }
+#initialOverlay > #crush{
+    position: relative;
+    top: -10%;
+    left: -1%;
+    width: 106%;
+}
+#initialOverlay > #emoji{
+    position: relative;
+    top: 1%;
+    left: -1%;
+    width: 80%;
+}
+
 #scoreSection{
     width: 20.9%;
     height: 8.1%;
