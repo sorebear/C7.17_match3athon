@@ -7,14 +7,14 @@ var game = {
     init: function() {
         //Will map out the Emoji objects onto the map
         game.clickHandler(); //Initializes the clickHandler on game start.
-        for (var startColumn = 7; startColumn > -1; startColumn--) {
-            for (var startRow = 0; startRow < 8; startRow++) {
+        for (var startRow = 7; startRow > -1; startRow--) {
+            for (var startColumn = 0; startColumn < 8; startColumn++) {
                 var newEmoji = game.generateRandomEmoji();
-                game.gameMap[startRow][startColumn] = newEmoji;
+                game.gameMap[startColumn][startRow] = newEmoji;
                 var newDiv = $("<div>").addClass("emojiContainer").attr("position", startRow +"x"+ startColumn);
                 var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg");
                 newDiv.append(newImg);
-                $('#iphoneScreen').append(newDiv);
+                $('#iphone').append(newDiv);
             }
         }
     },
@@ -81,7 +81,7 @@ var game = {
         var tempHoldImg2 = null;
         for (var rowCounter = 7; rowCounter > 1; rowCounter--) {
             for (var columnCounter = 0; columnCounter < 8; columnCounter++) {
-                var currentPositionImg = game.gameMap[rowCounter][columnCounter].name;
+                var currentPositionImg = game.gameMap[columnCounter][rowCounter].name;
                 if (currentPositionImg === tempHoldImg2) {
                     console.log("I found a horizontal match of 3 from position " + rowCounter + "x" + (columnCounter - 2) + " to " + rowCounter + "x" + columnCounter);
                     game.setMatchedToBeDestroyed(rowCounter, columnCounter, currentPositionImg, "horizontal");
@@ -91,11 +91,11 @@ var game = {
                     tempHoldImg = currentPositionImg;
                     tempHoldImg2 = null;
                 }
-                var oneBelowImg = game.gameMap[rowCounter - 1][columnCounter].name;
+                var oneBelowImg = game.gameMap[columnCounter][rowCounter - 1].name;
                 if (currentPositionImg === oneBelowImg) {
-                    var twoBelowImg = game.gameMap[rowCounter - 2][columnCounter].name;
+                    var twoBelowImg = game.gameMap[columnCounter][rowCounter - 2].name;
                     if (oneBelowImg === twoBelowImg) {
-                        console.log("I found a vertical match of 3 from position " + rowCounter + "x" + columnCounter + " to " + (rowCounter - 2) + "x" + columnCounter);
+                        console.log("I found a vertical match of 3 from position " + (rowCounter-2) + "x" + columnCounter + " to " + rowCounter + "x" + columnCounter);
                         game.setMatchedToBeDestroyed(rowCounter, columnCounter, currentPositionImg, "vertical");
                     }
                 }
@@ -103,9 +103,9 @@ var game = {
             tempHoldImg=null;
             tempHoldImg2=null;
         }
-        for (rowCounter = 1; rowCounter > -1; rowCounter++) {
+        for (rowCounter = 1; rowCounter > -1; rowCounter--) {
             for (columnCounter = 0; columnCounter < 8; columnCounter++) {
-                currentPositionImg = game.gameMap[rowCounter][columnCounter].name;
+                currentPositionImg = game.gameMap[columnCounter][rowCounter].name;
                 if (currentPositionImg === tempHoldImg2) {
                     console.log("I found a horizontal match of 3 from position " + rowCounter + "x" + columnCounter + " to " + rowCounter + "x" + (columnCounter + 2));
                     game.setMatchedToBeDestroyed(rowCounter, columnCounter, currentPositionImg, "horizontal");
@@ -117,41 +117,41 @@ var game = {
                 }
             }
         }
+        setTimeout(function(){game.destroyEmojis()}, 500);
     },
     setMatchedToBeDestroyed: function(startingRow, startingColumn, matchingEmoji, direction) {
         if (direction === 'vertical') {
             $("div[position=" + startingRow + "x" + startingColumn + "]").addClass('readyToDestroy');
-            game.gameMap[startingRow].splice(startingColumn, 1);
-            $("div[position=" + (startingRow + 1) + "x" + startingColumn + "]").addClass('readyToDestroy');
-            game.gameMap[startingRow + 1].splice(startingColumn, 1);
+            game.gameMap[startingColumn].splice(startingRow, 1);
+            $("div[position=" + (startingRow - 1) + "x" + startingColumn + "]").addClass('readyToDestroy');
+            game.gameMap[startingColumn].splice((startingRow - 1), 1);
             var nextImage = matchingEmoji;
             var nextImagePosition = 2;
-            while (nextImage === matchingEmoji && nextImagePosition < 8) {
-                $("div[position=" + (startingRow + nextImagePosition) + "x" + startingColumn + "]").addClass('readyToDestroy');
-                game.gameMap[startingRow + nextImagePosition].splice(startingColumn, 1);
+            while (nextImage === matchingEmoji && nextImagePosition > -1) {
+                $("div[position=" + (startingRow - nextImagePosition) + "x" + startingColumn + "]").addClass('readyToDestroy');
+                game.gameMap[startingColumn].splice((startingRow - nextImagePosition), 1);
                 nextImagePosition++;
-                if (startingRow+nextImagePosition < 8) {
-                    nextImage = game.gameMap[startingRow + nextImagePosition][startingColumn].name;
+                if (startingRow-nextImagePosition > -1) {
+                    nextImage = game.gameMap[startingColumn][startingRow - nextImagePosition].name;
                 }
             }
         } else {
             $("div[position=" + startingRow + "x" + (startingColumn-2) + "]").addClass('readyToDestroy');
-            game.gameMap[startingRow].splice(startingColumn-2, 1);
+            game.gameMap[startingColumn-2].splice(startingRow, 1);
             $("div[position=" + startingRow + "x" + (startingColumn-1) + "]").addClass('readyToDestroy');
-            game.gameMap[startingRow].splice(startingColumn-1, 1);
+            game.gameMap[startingColumn-1].splice(startingRow, 1);
             nextImage = matchingEmoji;
             nextImagePosition = 0;
             while (nextImage === matchingEmoji && nextImagePosition < 8) {
                 $("div[position=" + startingRow + "x" + (startingColumn+nextImagePosition) + "]").addClass('readyToDestroy');
-                game.gameMap[startingRow].splice(startingColumn+nextImagePosition, 1);
+                game.gameMap[startingColumn+nextImagePosition].splice(startingRow, 1);
                 nextImagePosition++;
                 if (startingColumn+nextImagePosition < 8) {
-                    nextImage = game.gameMap[startingRow][startingColumn+nextImagePosition].name;
+                    nextImage = game.gameMap[startingColumn+nextImagePosition][startingRow].name;
                 }
             }
 
         }
-        setTimeout(function(){game.destroyEmojis()}, 500);
     },
     destroyEmojis: function() {
         $(".readyToDestroy").empty();
