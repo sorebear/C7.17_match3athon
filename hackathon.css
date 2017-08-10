@@ -83,12 +83,13 @@ body{
     color: #ffffff;
     position: fixed;
     top: 45%;
-    left:45%;
+    left:44.5%;
     font-size: 32px;
-}
-#initialOverlay > button:hover{
     animation: beat .6s infinite alternate;
     transform-origin: center;
+}
+#initialOverlay > button:hover{
+
 }
 #initialOverlay > button:focus{
     outline: none;
