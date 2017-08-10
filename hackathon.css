@@ -72,14 +72,18 @@ body{
     right: 23%;
 }
 #post_it_note > #postittext{
-    font-family: "Lucida Handwriting";
+    font-family: 'Sedgwick Ave', cursive;
     height: 58%;
     width: 68%;
     position: absolute;
     left: 13%;
-    bottom: 25%;
+    bottom: 36.5%;
 }
-
+#post_it_note > #postittext > h1{
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: medium;
+}
 
 #iphoneScreen{
     width: 20.9%;
@@ -124,8 +128,7 @@ body{
 
 }
 #initialOverlay > button:hover{
-    animation:spin .3s linear infinite;
-    transform-origin: center;
+    transform: scale(1.4);
 }
 #initialOverlay > button:focus{
     outline: none;
@@ -188,7 +191,7 @@ body{
 }
 #timer{
     position: absolute;
-    top: 34.5%;
+    top: 34.7%;
     right: 12.3%;
     width: 8.5%;
 }
@@ -202,12 +205,27 @@ body{
 @keyframes beat{
     to { transform: scale(1.4); }
 }
-.selected{
-    box-shadow: 0 0 2px  1px red;
+@keyframes beat1{
+    to { transform: scale(.8); }
+}
+.selected {
+    background: #0d69a3;
+    background-image: -webkit-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -moz-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -ms-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -o-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: linear-gradient(to bottom, #0d69a3, #19a7fa);
+    border-style: solid;
+    border-color: black;
+    border: thin;
 }
 .to_be_selected {
-    box-shadow: 0 0 2px  1px green;
+    animation: beat1 .5s infinite alternate;
+    transform-origin: center;
+
 }
+
+
 
 #endGameOverlay{
     color: white;

@@ -8,7 +8,8 @@
 }
 
 .readyToDestroy {
-    background-color: red;
+    animation: spin .5s;
+
 }
 
 @keyframes dropAnimationTop {
@@ -51,3 +52,6 @@
     to {transform: translateY(0%)}
 }
 
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(360deg)
+    } to { transform: scale(.1);}}
