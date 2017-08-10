@@ -16,7 +16,7 @@ var game = {
                 var newEmoji = game.generateRandomEmoji();
                 game.gameMap[startColumn][startRow] = newEmoji;
                 var newDiv = $("<div>").addClass("emojiContainer").attr("position", startRow +"x"+ startColumn);
-                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg").addClass("h" + startRow +"x"+ startColumn);
+                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg");
                 newDiv.append(newImg);
                 $('#iphoneScreen').append(newDiv);
             }
