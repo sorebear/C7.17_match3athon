@@ -32,7 +32,7 @@ body{
     height: 98%;
     top: 1%;
 }
-#desk_space_left > img{
+#desk_space_left > #calculator{
     height: 50%;
     width: 57%;
     position: relative;
@@ -40,14 +40,47 @@ body{
     transform: rotate(30deg);
     z-index: -1;
 }
-#desk_space_right > img{
+#desk_space_left > #headphonesHolder{
+    position: absolute;
+    left:5%;
+    bottom: -12%;
+    width: 35%;
+    z-index: -1;
+
+}
+#headphonesHolder > #headphones{
+    width: 100%;
+    transform: rotate(45deg);
+    z-index: -1;
+
+}
+#desk_space_right > #watch{
     height: 115%;
     transform: rotate(-25deg);
     position: relative;
     right: 15%;
     bottom: 10%;
-    z-index: -1;
 }
+#post_it_note{
+    background-image: url("images/postitnote.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 15%;
+    height: 31%;
+    bottom:20%;
+    right: 23%;
+}
+#post_it_note > #postittext{
+    font-family: "Lucida Handwriting";
+    height: 58%;
+    width: 68%;
+    position: absolute;
+    left: 13%;
+    bottom: 25%;
+}
+
+
 #iphoneScreen{
     width: 20.9%;
     height: 67.4%;
@@ -55,6 +88,7 @@ body{
     left: 37.48%;
     top: 20.3%;
     z-index: 0;
+    overflow: hidden;
 }
 #initialOverlay{
     width: 20.9%;
@@ -79,11 +113,11 @@ body{
     -webkit-border-radius: 28px;
     -moz-border-radius: 28px;
     border-radius: 28px;
-    font-family: Georgia;
+    font-family: 'Georgia';
     color: #ffffff;
-    position: fixed;
+    position: absolute;
     top: 45%;
-    left:44.5%;
+    left: 34%;
     font-size: 32px;
     animation: beat .6s infinite alternate;
     transform-origin: center;
@@ -115,7 +149,7 @@ body{
     position: absolute;
     left: 37.5%;
     top: 12.2%;
-    z-index: -1;
+    z-index: 0;
     text-align: center;
     font-family: Phosphate;
     font-size: xx-large;
@@ -132,7 +166,7 @@ body{
     position: absolute;
     left: 37.5%;
     top: 79.5%;
-    z-index: -1;
+    z-index: 0;
     background: #006eb8;
     background-image: -moz-linear-gradient(top, #28aafa, #006eb8);
     background-image: -ms-linear-gradient(top, #28aafa, #006eb8);
@@ -158,10 +192,9 @@ body{
     right: 12.3%;
     width: 8.5%;
 }
-#timer > img{
+#timer > img {
     width: 100%;
     transform: rotate(-25deg);
-    animation:spin 60s linear infinite;
 }
 @-webkit-keyframes spin
 { 100% { -webkit-transform: rotate(360deg);
@@ -174,4 +207,20 @@ body{
 }
 .to_be_selected {
     box-shadow: 0 0 2px  1px green;
+}
+
+#endGameOverlay{
+    color: white;
+    width: 20.9%;
+    height: 75.4%;
+    position: absolute;
+    left: 37.48%;
+    top: 12.3%;
+    background: #0d69a3;
+    background-image: -webkit-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -moz-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -ms-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -o-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: linear-gradient(to bottom, #0d69a3, #19a7fa);
+    display: none;
 }
