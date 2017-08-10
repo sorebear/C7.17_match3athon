@@ -32,7 +32,7 @@ body{
     height: 98%;
     top: 1%;
 }
-#desk_space_left > img{
+#desk_space_left > #calculator{
     height: 50%;
     width: 57%;
     position: relative;
@@ -40,7 +40,21 @@ body{
     transform: rotate(30deg);
     z-index: -1;
 }
-#desk_space_right > img{
+#desk_space_left > #headphonesHolder{
+    position: absolute;
+    left:5%;
+    bottom: -12%;
+    width: 35%;
+    z-index: -1;
+
+}
+#headphonesHolder > #headphones{
+    width: 100%;
+    transform: rotate(45deg);
+    z-index: -1;
+
+}
+#desk_space_right > #watch{
     height: 115%;
     transform: rotate(-25deg);
     position: relative;
@@ -48,6 +62,17 @@ body{
     bottom: 10%;
     z-index: -1;
 }
+#post_it_note{
+    position: absolute;
+    width: 15%;
+    height: 25%;
+    bottom:20%;
+    right: 23%;
+}
+#post_it_note > #note{
+    width: 100%;
+}
+
 #iphoneScreen{
     width: 20.9%;
     height: 67.4%;
