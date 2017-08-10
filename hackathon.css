@@ -76,8 +76,8 @@ body{
     background-image: -ms-linear-gradient(top, #12e007, #099e38);
     background-image: -o-linear-gradient(top, #12e007, #099e38);
     background-image: linear-gradient(to bottom, #12e007, #099e38);
-    -webkit-border-radius: 28;
-    -moz-border-radius: 28;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
     border-radius: 28px;
     font-family: Georgia;
     color: #ffffff;
@@ -153,4 +153,10 @@ body{
 }}
 @keyframes beat{
     to { transform: scale(1.4); }
+}
+.selected{
+    box-shadow: 0 0 2px  1px red;
+}
+.to_be_selected {
+    box-shadow: 0 0 2px  1px green;
 }

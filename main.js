@@ -47,16 +47,16 @@ var game = {
         if (game.firstEmojiSelected === null) {
             game.firstSelection(emoji); //If there is already a first selection, launch the secondSelection Method
             game.firstEmojiSelected = $(emoji).attr("position");
-            console.log('firstEmojiSelected assigned: ' + game.firstEmojiSelected);
-            //game.firstSelection(this.firstEmojiSelected); //If there is already a first selection, launch the secondSelection Method
+
+             //If there is already a first selection, launch the secondSelection Method
 
         } else {
             //check if second Emoji is a valid selection
-            //game.secondEmojiSelected = emoji;
+
             console.log('second emoji assigned:  ' + game.secondEmojiSelected);
-            //game.secondSelection(); //Otherwise, launch the firstSelection Method
+            game.secondSelection(emoji); //Otherwise, launch the firstSelection Method
             game.secondEmojiSelected = $(emoji).attr("position");
-            //game.secondSelection(); //Otherwise, launch the firstSelection Method ;;;secondEmojiSelected
+
 
         }
     },
@@ -64,19 +64,782 @@ var game = {
         //1. Highlight the selected Emoji on the DOM in some way
 
 
-        $(emoji).css('box-shadow', '0 0 2px  1px red');
-
-
-
+        $(emoji).addClass('selected');
 
 
         //2. Highlight all of the adjacent Emojis on the Dom in another way
 
+        switch(emoji){
+            case '7x0':
+                $(emoji).attr("7x1").addClass('to_be_selected');
+                $(emoji).attr("6x0").addClass('to_be_selected');
+                break;
+            case '7x1':
+                $(emoji).attr("7x0").addClass('to_be_selected');
+                $(emoji).attr("7x2").addClass('to_be_selected');
+                $(emoji).attr("6x1").addClass('to_be_selected');
+                break;
+            case '7x2':
+                $(emoji).attr("7x1").addClass('to_be_selected');
+                $(emoji).attr("7x3").addClass('to_be_selected');
+                $(emoji).attr("6x2").addClass('to_be_selected');
+                break;
+            case '7x3':
+                $(emoji).attr("7x2").addClass('to_be_selected');
+                $(emoji).attr("7x4").addClass('to_be_selected');
+                $(emoji).attr("6x3").addClass('to_be_selected');
+                break;
+            case '7x4':
+                $(emoji).attr("7x3").addClass('to_be_selected');
+                $(emoji).attr("7x5").addClass('to_be_selected');
+                $(emoji).attr("6x4").addClass('to_be_selected');
+                break;
+            case '7x5':
+                $(emoji).attr("7x4").addClass('to_be_selected');
+                $(emoji).attr("7x6").addClass('to_be_selected');
+                $(emoji).attr("6x5").addClass('to_be_selected');
+                break;
+            case '7x6':
+                $(emoji).attr("7x5").addClass('to_be_selected');
+                $(emoji).attr("7x7").addClass('to_be_selected');
+                $(emoji).attr("6x6").addClass('to_be_selected');
+                break;
+            case '7x7':
+                $(emoji).attr("7x6").addClass('to_be_selected');
+                $(emoji).attr("6x7").addClass('to_be_selected');
+                break;
+
+
+
+            case '6x0':
+                $(emoji).attr("7x0").addClass('to_be_selected');
+                $(emoji).attr("6x1").addClass('to_be_selected');
+                $(emoji).attr("5x0").addClass('to_be_selected');
+                break;
+            case '6x1':
+                $(emoji).attr("7x1").addClass('to_be_selected');
+                $(emoji).attr("6x0").addClass('to_be_selected');
+                $(emoji).attr("6x2").addClass('to_be_selected');
+                $(emoji).attr("5x1").addClass('to_be_selected');
+                break;
+            case '6x2':
+                $(emoji).attr("7x2").addClass('to_be_selected');
+                $(emoji).attr("6x1").addClass('to_be_selected');
+                $(emoji).attr("6x3").addClass('to_be_selected');
+                $(emoji).attr("5x2").addClass('to_be_selected');
+                break;
+            case '6x3':
+                $(emoji).attr("7x3").addClass('to_be_selected');
+                $(emoji).attr("6x2").addClass('to_be_selected');
+                $(emoji).attr("6x4").addClass('to_be_selected');
+                $(emoji).attr("5x3").addClass('to_be_selected');
+                break;
+            case '6x4':
+                $(emoji).attr("7x4").addClass('to_be_selected');
+                $(emoji).attr("6x3").addClass('to_be_selected');
+                $(emoji).attr("6x5").addClass('to_be_selected');
+                $(emoji).attr("5x4").addClass('to_be_selected');
+                break;
+            case '6x5':
+                $(emoji).attr("7x5").addClass('to_be_selected');
+                $(emoji).attr("6x4").addClass('to_be_selected');
+                $(emoji).attr("6x6").addClass('to_be_selected');
+                $(emoji).attr("5x5").addClass('to_be_selected');
+                break;
+            case '6x6':
+                $(emoji).attr("7x6").addClass('to_be_selected');
+                $(emoji).attr("6x5").addClass('to_be_selected');
+                $(emoji).attr("6x7").addClass('to_be_selected');
+                $(emoji).attr("5x6").addClass('to_be_selected');
+                break;
+            case '6x7':
+                $(emoji).attr("7x7").addClass('to_be_selected');
+                $(emoji).attr("6x6").addClass('to_be_selected');
+                $(emoji).attr("5x7").addClass('to_be_selected');
+                break;
+
+
+            case '5x0':
+                $(emoji).attr("4x0").addClass('to_be_selected');
+                $(emoji).attr("5x1").addClass('to_be_selected');
+                $(emoji).attr("6x0").addClass('to_be_selected');
+                break;
+            case '5x1':
+                $(emoji).attr("6x1").addClass('to_be_selected');
+                $(emoji).attr("5x0").addClass('to_be_selected');
+                $(emoji).attr("5x2").addClass('to_be_selected');
+                $(emoji).attr("4x1").addClass('to_be_selected');
+                break;
+            case '5x2':
+                $(emoji).attr("6x2").addClass('to_be_selected');
+                $(emoji).attr("5x1").addClass('to_be_selected');
+                $(emoji).attr("5x3").addClass('to_be_selected');
+                $(emoji).attr("4x2").addClass('to_be_selected');
+                break;
+            case '5x3':
+                $(emoji).attr("6x3").addClass('to_be_selected');
+                $(emoji).attr("5x2").addClass('to_be_selected');
+                $(emoji).attr("5x4").addClass('to_be_selected');
+                $(emoji).attr("4x3").addClass('to_be_selected');
+                break;
+            case '5x4':
+                $(emoji).attr("6x4").addClass('to_be_selected');
+                $(emoji).attr("5x3").addClass('to_be_selected');
+                $(emoji).attr("5x5").addClass('to_be_selected');
+                $(emoji).attr("4x4").addClass('to_be_selected');
+                break;
+            case '5x5':
+                $(emoji).attr("6x5").addClass('to_be_selected');
+                $(emoji).attr("5x4").addClass('to_be_selected');
+                $(emoji).attr("5x6").addClass('to_be_selected');
+                $(emoji).attr("4x5").addClass('to_be_selected');
+                break;
+            case '5x6':
+                $(emoji).attr("6x6").addClass('to_be_selected');
+                $(emoji).attr("5x5").addClass('to_be_selected');
+                $(emoji).attr("5x7").addClass('to_be_selected');
+                $(emoji).attr("4x6").addClass('to_be_selected');
+                break;
+            case '5x7':
+                $(emoji).attr("6x7").addClass('to_be_selected');
+                $(emoji).attr("5x6").addClass('to_be_selected');
+                $(emoji).attr("4x7").addClass('to_be_selected');
+                break;
+
+
+
+
+
+            case '4x0':
+                $(emoji).attr("5x0").addClass('to_be_selected');
+                $(emoji).attr("4x1").addClass('to_be_selected');
+                $(emoji).attr("3x0").addClass('to_be_selected');
+                break;
+            case '4x1':
+                $(emoji).attr("5x1").addClass('to_be_selected');
+                $(emoji).attr("4x0").addClass('to_be_selected');
+                $(emoji).attr("4x2").addClass('to_be_selected');
+                $(emoji).attr("3x1").addClass('to_be_selected');
+                break;
+            case '4x2':
+                $(emoji).attr("5x2").addClass('to_be_selected');
+                $(emoji).attr("4x1").addClass('to_be_selected');
+                $(emoji).attr("4x3").addClass('to_be_selected');
+                $(emoji).attr("3x2").addClass('to_be_selected');
+                break;
+            case '4x3':
+                $(emoji).attr("5x3").addClass('to_be_selected');
+                $(emoji).attr("4x2").addClass('to_be_selected');
+                $(emoji).attr("4x4").addClass('to_be_selected');
+                $(emoji).attr("3x3").addClass('to_be_selected');
+                break;
+            case '4x4':
+                $(emoji).attr("5x4").addClass('to_be_selected');
+                $(emoji).attr("4x3").addClass('to_be_selected');
+                $(emoji).attr("4x5").addClass('to_be_selected');
+                $(emoji).attr("3x4").addClass('to_be_selected');
+                break;
+            case '4x5':
+                $(emoji).attr("5x5").addClass('to_be_selected');
+                $(emoji).attr("4x4").addClass('to_be_selected');
+                $(emoji).attr("4x6").addClass('to_be_selected');
+                $(emoji).attr("3x5").addClass('to_be_selected');
+                break;
+            case '4x6':
+                $(emoji).attr("5x6").addClass('to_be_selected');
+                $(emoji).attr("4x5").addClass('to_be_selected');
+                $(emoji).attr("4x7").addClass('to_be_selected');
+                $(emoji).attr("3x6").addClass('to_be_selected');
+                break;
+            case '4x7':
+                $(emoji).attr("7x7").addClass('to_be_selected');
+                $(emoji).attr("4x6").addClass('to_be_selected');
+                $(emoji).attr("5x7").addClass('to_be_selected');
+                break;
+
+
+
+
+            case '3x0':
+                $(emoji).attr("4x0").addClass('to_be_selected');
+                $(emoji).attr("3x1").addClass('to_be_selected');
+                $(emoji).attr("2x0").addClass('to_be_selected');
+                break;
+            case '3x1':
+                $(emoji).attr("4x1").addClass('to_be_selected');
+                $(emoji).attr("3x0").addClass('to_be_selected');
+                $(emoji).attr("3x2").addClass('to_be_selected');
+                $(emoji).attr("2x1").addClass('to_be_selected');
+                break;
+            case '3x2':
+                $(emoji).attr("4x2").addClass('to_be_selected');
+                $(emoji).attr("3x1").addClass('to_be_selected');
+                $(emoji).attr("3x3").addClass('to_be_selected');
+                $(emoji).attr("2x2").addClass('to_be_selected');
+                break;
+            case '3x3':
+                $(emoji).attr("4x3").addClass('to_be_selected');
+                $(emoji).attr("3x2").addClass('to_be_selected');
+                $(emoji).attr("3x4").addClass('to_be_selected');
+                $(emoji).attr("2x3").addClass('to_be_selected');
+                break;
+            case '3x4':
+                $(emoji).attr("4x4").addClass('to_be_selected');
+                $(emoji).attr("3x3").addClass('to_be_selected');
+                $(emoji).attr("3x5").addClass('to_be_selected');
+                $(emoji).attr("2x4").addClass('to_be_selected');
+                break;
+            case '3x5':
+                $(emoji).attr("4x5").addClass('to_be_selected');
+                $(emoji).attr("3x4").addClass('to_be_selected');
+                $(emoji).attr("3x6").addClass('to_be_selected');
+                $(emoji).attr("2x5").addClass('to_be_selected');
+                break;
+            case '3x6':
+                $(emoji).attr("4x6").addClass('to_be_selected');
+                $(emoji).attr("3x5").addClass('to_be_selected');
+                $(emoji).attr("3x7").addClass('to_be_selected');
+                $(emoji).attr("2x6").addClass('to_be_selected');
+                break;
+            case '3x7':
+                $(emoji).attr("4x7").addClass('to_be_selected');
+                $(emoji).attr("3x6").addClass('to_be_selected');
+                $(emoji).attr("2x7").addClass('to_be_selected');
+                break;
+
+
+
+
+            case '2x0':
+                $(emoji).attr("3x0").addClass('to_be_selected');
+                $(emoji).attr("2x1").addClass('to_be_selected');
+                $(emoji).attr("1x0").addClass('to_be_selected');
+                break;
+            case '2x1':
+                $(emoji).attr("3x1").addClass('to_be_selected');
+                $(emoji).attr("2x0").addClass('to_be_selected');
+                $(emoji).attr("2x2").addClass('to_be_selected');
+                $(emoji).attr("1x1").addClass('to_be_selected');
+                break;
+            case '2x2':
+                $(emoji).attr("3x2").addClass('to_be_selected');
+                $(emoji).attr("2x1").addClass('to_be_selected');
+                $(emoji).attr("2x3").addClass('to_be_selected');
+                $(emoji).attr("1x2").addClass('to_be_selected');
+                break;
+            case '2x3':
+                $(emoji).attr("3x3").addClass('to_be_selected');
+                $(emoji).attr("2x2").addClass('to_be_selected');
+                $(emoji).attr("2x4").addClass('to_be_selected');
+                $(emoji).attr("1x3").addClass('to_be_selected');
+                break;
+            case '2x4':
+                $(emoji).attr("3x4").addClass('to_be_selected');
+                $(emoji).attr("2x3").addClass('to_be_selected');
+                $(emoji).attr("2x5").addClass('to_be_selected');
+                $(emoji).attr("1x4").addClass('to_be_selected');
+                break;
+            case '2x5':
+                $(emoji).attr("3x5").addClass('to_be_selected');
+                $(emoji).attr("2x4").addClass('to_be_selected');
+                $(emoji).attr("2x6").addClass('to_be_selected');
+                $(emoji).attr("1x5").addClass('to_be_selected');
+                break;
+            case '2x6':
+                $(emoji).attr("3x6").addClass('to_be_selected');
+                $(emoji).attr("2x5").addClass('to_be_selected');
+                $(emoji).attr("2x7").addClass('to_be_selected');
+                $(emoji).attr("1x6").addClass('to_be_selected');
+                break;
+            case '2x7':
+                $(emoji).attr("3x7").addClass('to_be_selected');
+                $(emoji).attr("2x6").addClass('to_be_selected');
+                $(emoji).attr("1x7").addClass('to_be_selected');
+                break;
+
+
+
+
+            case '1x0':
+                $(emoji).attr("2x0").addClass('to_be_selected');
+                $(emoji).attr("1x1").addClass('to_be_selected');
+                $(emoji).attr("0x0").addClass('to_be_selected');
+                break;
+            case '1x1':
+                $(emoji).attr("2x1").addClass('to_be_selected');
+                $(emoji).attr("1x0").addClass('to_be_selected');
+                $(emoji).attr("1x2").addClass('to_be_selected');
+                $(emoji).attr("0x1").addClass('to_be_selected');
+                break;
+            case '1x2':
+                $(emoji).attr("2x2").addClass('to_be_selected');
+                $(emoji).attr("1x1").addClass('to_be_selected');
+                $(emoji).attr("1x3").addClass('to_be_selected');
+                $(emoji).attr("0x2").addClass('to_be_selected');
+                break;
+            case '1x3':
+                $(emoji).attr("2x3").addClass('to_be_selected');
+                $(emoji).attr("1x2").addClass('to_be_selected');
+                $(emoji).attr("1x4").addClass('to_be_selected');
+                $(emoji).attr("0x3").addClass('to_be_selected');
+                break;
+            case '1x4':
+                $(emoji).attr("2x4").addClass('to_be_selected');
+                $(emoji).attr("1x3").addClass('to_be_selected');
+                $(emoji).attr("1x5").addClass('to_be_selected');
+                $(emoji).attr("0x4").addClass('to_be_selected');
+                break;
+            case '1x5':
+                $(emoji).attr("2x5").addClass('to_be_selected');
+                $(emoji).attr("1x4").addClass('to_be_selected');
+                $(emoji).attr("1x6").addClass('to_be_selected');
+                $(emoji).attr("0x5").addClass('to_be_selected');
+                break;
+            case '1x6':
+                $(emoji).attr("2x6").addClass('to_be_selected');
+                $(emoji).attr("1x5").addClass('to_be_selected');
+                $(emoji).attr("1x7").addClass('to_be_selected');
+                $(emoji).attr("0x6").addClass('to_be_selected');
+                break;
+            case '1x7':
+                $(emoji).attr("2x7").addClass('to_be_selected');
+                $(emoji).attr("1x6").addClass('to_be_selected');
+                $(emoji).attr("0x7").addClass('to_be_selected');
+                break;
+
+
+            case '0x0':
+                $(emoji).attr("0x1").addClass('to_be_selected');
+                $(emoji).attr("1x0").addClass('to_be_selected');
+                break;
+            case '0x1':
+                $(emoji).attr("0x0").addClass('to_be_selected');
+                $(emoji).attr("0x2").addClass('to_be_selected');
+                $(emoji).attr("1x1").addClass('to_be_selected');
+                break;
+            case '0x2':
+                $(emoji).attr("0x1").addClass('to_be_selected');
+                $(emoji).attr("0x3").addClass('to_be_selected');
+                $(emoji).attr("1x2").addClass('to_be_selected');
+                break;
+            case '0x3':
+                $(emoji).attr("0x2").addClass('to_be_selected');
+                $(emoji).attr("0x4").addClass('to_be_selected');
+                $(emoji).attr("1x3").addClass('to_be_selected');
+                break;
+            case '0x4':
+                $(emoji).attr("0x3").addClass('to_be_selected');
+                $(emoji).attr("0x5").addClass('to_be_selected');
+                $(emoji).attr("1x4").addClass('to_be_selected');
+                break;
+            case '0x5':
+                $(emoji).attr("0x4").addClass('to_be_selected');
+                $(emoji).attr("0x6").addClass('to_be_selected');
+                $(emoji).attr("1x5").addClass('to_be_selected');
+                break;
+            case '0x6':
+                $(emoji).attr("0x5").addClass('to_be_selected');
+                $(emoji).attr("0x7").addClass('to_be_selected');
+                $(emoji).attr("1x6").addClass('to_be_selected');
+                break;
+            case '0x7':
+                $(emoji).attr("0x6").addClass('to_be_selected');
+                $(emoji).attr("1x7").addClass('to_be_selected');
+                break;
+
+
+        }
+
+
     },
-    secondSelection: function() {
+    secondSelection: function(emoji) {
+
+
         //Swap the two emojis on the DOM and in the array
+        switch(emoji){
+            case '7x0':
+
+                $(emoji).attr("7x1").removeClass('to_be_selected');
+                $(emoji).attr("6x0").removeClass('to_be_selected');
+                break;
+            case '7x1':
+                $(emoji).attr("7x0").removeClass('to_be_selected');
+                $(emoji).attr("7x2").removeClass('to_be_selected');
+                $(emoji).attr("6x1").removeClass('to_be_selected');
+                break;
+            case '7x2':
+                $(emoji).attr("7x1").removeClass('to_be_selected');
+                $(emoji).attr("7x3").removeClass('to_be_selected');
+                $(emoji).attr("6x2").removeClass('to_be_selected');
+                break;
+            case '7x3':
+                $(emoji).attr("7x2").removeClass('to_be_selected');
+                $(emoji).attr("7x4").removeClass('to_be_selected');
+                $(emoji).attr("6x3").removeClass('to_be_selected');
+                break;
+            case '7x4':
+                $(emoji).attr("7x3").removeClass('to_be_selected');
+                $(emoji).attr("7x5").removeClass('to_be_selected');
+                $(emoji).attr("6x4").removeClass('to_be_selected');
+                break;
+            case '7x5':
+                $(emoji).attr("7x4").removeClass('to_be_selected');
+                $(emoji).attr("7x6").removeClass('to_be_selected');
+                $(emoji).attr("6x5").removeClass('to_be_selected');
+                break;
+            case '7x6':
+                $(emoji).attr("7x5").removeClass('to_be_selected');
+                $(emoji).attr("7x7").removeClass('to_be_selected');
+                $(emoji).attr("6x6").removeClass('to_be_selected');
+                break;
+            case '7x7':
+                $(emoji).attr("7x6").removeClass('to_be_selected');
+                $(emoji).attr("6x7").removeClass('to_be_selected');
+                break;
+
+
+
+            case '6x0':
+                $(emoji).attr("7x0").removeClass('to_be_selected');
+                $(emoji).attr("6x1").removeClass('to_be_selected');
+                $(emoji).attr("5x0").removeClass('to_be_selected');
+                break;
+            case '6x1':
+                $(emoji).attr("7x1").removeClass('to_be_selected');
+                $(emoji).attr("6x0").removeClass('to_be_selected');
+                $(emoji).attr("6x2").removeClass('to_be_selected');
+                $(emoji).attr("5x1").removeClass('to_be_selected');
+                break;
+            case '6x2':
+                $(emoji).attr("7x2").removeClass('to_be_selected');
+                $(emoji).attr("6x1").removeClass('to_be_selected');
+                $(emoji).attr("6x3").removeClass('to_be_selected');
+                $(emoji).attr("5x2").removeClass('to_be_selected');
+                break;
+            case '6x3':
+                $(emoji).attr("7x3").removeClass('to_be_selected');
+                $(emoji).attr("6x2").removeClass('to_be_selected');
+                $(emoji).attr("6x4").removeClass('to_be_selected');
+                $(emoji).attr("5x3").removeClass('to_be_selected');
+                break;
+            case '6x4':
+                $(emoji).attr("7x4").removeClass('to_be_selected');
+                $(emoji).attr("6x3").removeClass('to_be_selected');
+                $(emoji).attr("6x5").removeClass('to_be_selected');
+                $(emoji).attr("5x4").removeClass('to_be_selected');
+                break;
+            case '6x5':
+                $(emoji).attr("7x5").removeClass('to_be_selected');
+                $(emoji).attr("6x4").removeClass('to_be_selected');
+                $(emoji).attr("6x6").removeClass('to_be_selected');
+                $(emoji).attr("5x5").removeClass('to_be_selected');
+                break;
+            case '6x6':
+                $(emoji).attr("7x6").removeClass('to_be_selected');
+                $(emoji).attr("6x5").removeClass('to_be_selected');
+                $(emoji).attr("6x7").removeClass('to_be_selected');
+                $(emoji).attr("5x6").removeClass('to_be_selected');
+                break;
+            case '6x7':
+                $(emoji).attr("7x7").removeClass('to_be_selected');
+                $(emoji).attr("6x6").removeClass('to_be_selected');
+                $(emoji).attr("5x7").removeClass('to_be_selected');
+                break;
+
+
+            case '5x0':
+                $(emoji).attr("4x0").removeClass('to_be_selected');
+                $(emoji).attr("5x1").removeClass('to_be_selected');
+                $(emoji).attr("6x0").removeClass('to_be_selected');
+                break;
+            case '5x1':
+                $(emoji).attr("6x1").removeClass('to_be_selected');
+                $(emoji).attr("5x0").removeClass('to_be_selected');
+                $(emoji).attr("5x2").removeClass('to_be_selected');
+                $(emoji).attr("4x1").removeClass('to_be_selected');
+                break;
+            case '5x2':
+                $(emoji).attr("6x2").removeClass('to_be_selected');
+                $(emoji).attr("5x1").removeClass('to_be_selected');
+                $(emoji).attr("5x3").removeClass('to_be_selected');
+                $(emoji).attr("4x2").removeClass('to_be_selected');
+                break;
+            case '5x3':
+                $(emoji).attr("6x3").removeClass('to_be_selected');
+                $(emoji).attr("5x2").removeClass('to_be_selected');
+                $(emoji).attr("5x4").removeClass('to_be_selected');
+                $(emoji).attr("4x3").removeClass('to_be_selected');
+                break;
+            case '5x4':
+                $(emoji).attr("6x4").removeClass('to_be_selected');
+                $(emoji).attr("5x3").removeClass('to_be_selected');
+                $(emoji).attr("5x5").removeClass('to_be_selected');
+                $(emoji).attr("4x4").removeClass('to_be_selected');
+                break;
+            case '5x5':
+                $(emoji).attr("6x5").removeClass('to_be_selected');
+                $(emoji).attr("5x4").removeClass('to_be_selected');
+                $(emoji).attr("5x6").removeClass('to_be_selected');
+                $(emoji).attr("4x5").removeClass('to_be_selected');
+                break;
+            case '5x6':
+                $(emoji).attr("6x6").removeClass('to_be_selected');
+                $(emoji).attr("5x5").removeClass('to_be_selected');
+                $(emoji).attr("5x7").removeClass('to_be_selected');
+                $(emoji).attr("4x6").removeClass('to_be_selected');
+                break;
+            case '5x7':
+                $(emoji).attr("6x7").removeClass('to_be_selected');
+                $(emoji).attr("5x6").removeClass('to_be_selected');
+                $(emoji).attr("4x7").removeClass('to_be_selected');
+                break;
+
+
+
+
+
+            case '4x0':
+                $(emoji).attr("5x0").addClass('to_be_selected');
+                $(emoji).attr("4x1").addClass('to_be_selected');
+                $(emoji).attr("3x0").addClass('to_be_selected');
+                break;
+            case '4x1':
+                $(emoji).attr("5x1").addClass('to_be_selected');
+                $(emoji).attr("4x0").addClass('to_be_selected');
+                $(emoji).attr("4x2").addClass('to_be_selected');
+                $(emoji).attr("3x1").addClass('to_be_selected');
+                break;
+            case '4x2':
+                $(emoji).attr("5x2").addClass('to_be_selected');
+                $(emoji).attr("4x1").addClass('to_be_selected');
+                $(emoji).attr("4x3").addClass('to_be_selected');
+                $(emoji).attr("3x2").addClass('to_be_selected');
+                break;
+            case '4x3':
+                $(emoji).attr("5x3").addClass('to_be_selected');
+                $(emoji).attr("4x2").addClass('to_be_selected');
+                $(emoji).attr("4x4").addClass('to_be_selected');
+                $(emoji).attr("3x3").addClass('to_be_selected');
+                break;
+            case '4x4':
+                $(emoji).attr("5x4").addClass('to_be_selected');
+                $(emoji).attr("4x3").addClass('to_be_selected');
+                $(emoji).attr("4x5").addClass('to_be_selected');
+                $(emoji).attr("3x4").addClass('to_be_selected');
+                break;
+            case '4x5':
+                $(emoji).attr("5x5").addClass('to_be_selected');
+                $(emoji).attr("4x4").addClass('to_be_selected');
+                $(emoji).attr("4x6").addClass('to_be_selected');
+                $(emoji).attr("3x5").addClass('to_be_selected');
+                break;
+            case '4x6':
+                $(emoji).attr("5x6").addClass('to_be_selected');
+                $(emoji).attr("4x5").addClass('to_be_selected');
+                $(emoji).attr("4x7").addClass('to_be_selected');
+                $(emoji).attr("3x6").addClass('to_be_selected');
+                break;
+            case '4x7':
+                $(emoji).attr("7x7").addClass('to_be_selected');
+                $(emoji).attr("4x6").addClass('to_be_selected');
+                $(emoji).attr("5x7").addClass('to_be_selected');
+                break;
+
+
+
+
+            case '3x0':
+                $(emoji).attr("4x0").addClass('to_be_selected');
+                $(emoji).attr("3x1").addClass('to_be_selected');
+                $(emoji).attr("2x0").addClass('to_be_selected');
+                break;
+            case '3x1':
+                $(emoji).attr("4x1").addClass('to_be_selected');
+                $(emoji).attr("3x0").addClass('to_be_selected');
+                $(emoji).attr("3x2").addClass('to_be_selected');
+                $(emoji).attr("2x1").addClass('to_be_selected');
+                break;
+            case '3x2':
+                $(emoji).attr("4x2").addClass('to_be_selected');
+                $(emoji).attr("3x1").addClass('to_be_selected');
+                $(emoji).attr("3x3").addClass('to_be_selected');
+                $(emoji).attr("2x2").addClass('to_be_selected');
+                break;
+            case '3x3':
+                $(emoji).attr("4x3").addClass('to_be_selected');
+                $(emoji).attr("3x2").addClass('to_be_selected');
+                $(emoji).attr("3x4").addClass('to_be_selected');
+                $(emoji).attr("2x3").addClass('to_be_selected');
+                break;
+            case '3x4':
+                $(emoji).attr("4x4").addClass('to_be_selected');
+                $(emoji).attr("3x3").addClass('to_be_selected');
+                $(emoji).attr("3x5").addClass('to_be_selected');
+                $(emoji).attr("2x4").addClass('to_be_selected');
+                break;
+            case '3x5':
+                $(emoji).attr("4x5").addClass('to_be_selected');
+                $(emoji).attr("3x4").addClass('to_be_selected');
+                $(emoji).attr("3x6").addClass('to_be_selected');
+                $(emoji).attr("2x5").addClass('to_be_selected');
+                break;
+            case '3x6':
+                $(emoji).attr("4x6").addClass('to_be_selected');
+                $(emoji).attr("3x5").addClass('to_be_selected');
+                $(emoji).attr("3x7").addClass('to_be_selected');
+                $(emoji).attr("2x6").addClass('to_be_selected');
+                break;
+            case '3x7':
+                $(emoji).attr("4x7").addClass('to_be_selected');
+                $(emoji).attr("3x6").addClass('to_be_selected');
+                $(emoji).attr("2x7").addClass('to_be_selected');
+                break;
+
+
+
+
+            case '2x0':
+                $(emoji).attr("3x0").addClass('to_be_selected');
+                $(emoji).attr("2x1").addClass('to_be_selected');
+                $(emoji).attr("1x0").addClass('to_be_selected');
+                break;
+            case '2x1':
+                $(emoji).attr("3x1").addClass('to_be_selected');
+                $(emoji).attr("2x0").addClass('to_be_selected');
+                $(emoji).attr("2x2").addClass('to_be_selected');
+                $(emoji).attr("1x1").addClass('to_be_selected');
+                break;
+            case '2x2':
+                $(emoji).attr("3x2").addClass('to_be_selected');
+                $(emoji).attr("2x1").addClass('to_be_selected');
+                $(emoji).attr("2x3").addClass('to_be_selected');
+                $(emoji).attr("1x2").addClass('to_be_selected');
+                break;
+            case '2x3':
+                $(emoji).attr("3x3").addClass('to_be_selected');
+                $(emoji).attr("2x2").addClass('to_be_selected');
+                $(emoji).attr("2x4").addClass('to_be_selected');
+                $(emoji).attr("1x3").addClass('to_be_selected');
+                break;
+            case '2x4':
+                $(emoji).attr("3x4").addClass('to_be_selected');
+                $(emoji).attr("2x3").addClass('to_be_selected');
+                $(emoji).attr("2x5").addClass('to_be_selected');
+                $(emoji).attr("1x4").addClass('to_be_selected');
+                break;
+            case '2x5':
+                $(emoji).attr("3x5").addClass('to_be_selected');
+                $(emoji).attr("2x4").addClass('to_be_selected');
+                $(emoji).attr("2x6").addClass('to_be_selected');
+                $(emoji).attr("1x5").addClass('to_be_selected');
+                break;
+            case '2x6':
+                $(emoji).attr("3x6").addClass('to_be_selected');
+                $(emoji).attr("2x5").addClass('to_be_selected');
+                $(emoji).attr("2x7").addClass('to_be_selected');
+                $(emoji).attr("1x6").addClass('to_be_selected');
+                break;
+            case '2x7':
+                $(emoji).attr("3x7").addClass('to_be_selected');
+                $(emoji).attr("2x6").addClass('to_be_selected');
+                $(emoji).attr("1x7").addClass('to_be_selected');
+                break;
+
+
+
+
+            case '1x0':
+                $(emoji).attr("2x0").addClass('to_be_selected');
+                $(emoji).attr("1x1").addClass('to_be_selected');
+                $(emoji).attr("0x0").addClass('to_be_selected');
+                break;
+            case '1x1':
+                $(emoji).attr("2x1").addClass('to_be_selected');
+                $(emoji).attr("1x0").addClass('to_be_selected');
+                $(emoji).attr("1x2").addClass('to_be_selected');
+                $(emoji).attr("0x1").addClass('to_be_selected');
+                break;
+            case '1x2':
+                $(emoji).attr("2x2").addClass('to_be_selected');
+                $(emoji).attr("1x1").addClass('to_be_selected');
+                $(emoji).attr("1x3").addClass('to_be_selected');
+                $(emoji).attr("0x2").addClass('to_be_selected');
+                break;
+            case '1x3':
+                $(emoji).attr("2x3").addClass('to_be_selected');
+                $(emoji).attr("1x2").addClass('to_be_selected');
+                $(emoji).attr("1x4").addClass('to_be_selected');
+                $(emoji).attr("0x3").addClass('to_be_selected');
+                break;
+            case '1x4':
+                $(emoji).attr("2x4").addClass('to_be_selected');
+                $(emoji).attr("1x3").addClass('to_be_selected');
+                $(emoji).attr("1x5").addClass('to_be_selected');
+                $(emoji).attr("0x4").addClass('to_be_selected');
+                break;
+            case '1x5':
+                $(emoji).attr("2x5").addClass('to_be_selected');
+                $(emoji).attr("1x4").addClass('to_be_selected');
+                $(emoji).attr("1x6").addClass('to_be_selected');
+                $(emoji).attr("0x5").addClass('to_be_selected');
+                break;
+            case '1x6':
+                $(emoji).attr("2x6").addClass('to_be_selected');
+                $(emoji).attr("1x5").addClass('to_be_selected');
+                $(emoji).attr("1x7").addClass('to_be_selected');
+                $(emoji).attr("0x6").addClass('to_be_selected');
+                break;
+            case '1x7':
+                $(emoji).attr("2x7").addClass('to_be_selected');
+                $(emoji).attr("1x6").addClass('to_be_selected');
+                $(emoji).attr("0x7").addClass('to_be_selected');
+                break;
+
+
+            case '0x0':
+                $(emoji).attr("0x1").addClass('to_be_selected');
+                $(emoji).attr("1x0").addClass('to_be_selected');
+                break;
+            case '0x1':
+                $(emoji).attr("0x0").addClass('to_be_selected');
+                $(emoji).attr("0x2").addClass('to_be_selected');
+                $(emoji).attr("1x1").addClass('to_be_selected');
+                break;
+            case '0x2':
+                $(emoji).attr("0x1").addClass('to_be_selected');
+                $(emoji).attr("0x3").addClass('to_be_selected');
+                $(emoji).attr("1x2").addClass('to_be_selected');
+                break;
+            case '0x3':
+                $(emoji).attr("0x2").addClass('to_be_selected');
+                $(emoji).attr("0x4").addClass('to_be_selected');
+                $(emoji).attr("1x3").addClass('to_be_selected');
+                break;
+            case '0x4':
+                $(emoji).attr("0x3").addClass('to_be_selected');
+                $(emoji).attr("0x5").addClass('to_be_selected');
+                $(emoji).attr("1x4").addClass('to_be_selected');
+                break;
+            case '0x5':
+                $(emoji).attr("0x4").addClass('to_be_selected');
+                $(emoji).attr("0x6").addClass('to_be_selected');
+                $(emoji).attr("1x5").addClass('to_be_selected');
+                break;
+            case '0x6':
+                $(emoji).attr("0x5").addClass('to_be_selected');
+                $(emoji).attr("0x7").addClass('to_be_selected');
+                $(emoji).attr("1x6").addClass('to_be_selected');
+                break;
+            case '0x7':
+                $(emoji).attr("0x6").addClass('to_be_selected');
+                $(emoji).attr("1x7").addClass('to_be_selected');
+                break;
+
+
+        }
+
         //game.checkForMatches(); //Check to see if a match was made.
-        //If no check was made, swap the two Emojis back.
+
         //game.firstEmojiSelected = null; //Re-Initialize the firstSelection boolean
     },
     checkForMatches: function() {
@@ -123,22 +886,29 @@ var game = {
                     tempHoldImg2 = null;
                 }
             }
+            tempHoldImg=null;
+            tempHoldImg2=null;
         }
         setTimeout(function(){
             game.destroyEmojis();
             for (var i = 0; i < game.objectsToDestroyFromGameMap.length; i++) {
                 game.gameMap[game.objectsToDestroyFromGameMap[i][0]].splice(game.objectsToDestroyFromGameMap[i][1], 1);
             }
+            game.objectsToDestroyFromGameMap = [];
         }, 500);
     },
     setMatchedToBeDestroyed: function(startingRow, startingColumn, matchingEmoji, direction) {
         if (direction === 'vertical') {
             if (!($("div[position=" + startingRow + "x" + startingColumn + "]").hasClass('readyToDestroy'))) {
                 game.objectsToDestroyFromGameMap.push([startingColumn, startingRow]);
+                game.score.tempScore += 10;
                 $("div[position=" + startingRow + "x" + startingColumn + "]").addClass('readyToDestroy');
+            } else {
+                game.score.tempScoreMultiplyer += 1;
             }
             if (!($("div[position=" + (startingRow - 1) + "x" + startingColumn + "]").hasClass('readyToDestroy'))) {
                 game.objectsToDestroyFromGameMap.push([startingColumn, (startingRow-1)]);
+                game.score.tempScore += 10;
                 $("div[position=" + (startingRow - 1) + "x" + startingColumn + "]").addClass('readyToDestroy');
             }
             var nextImage = matchingEmoji;
@@ -146,6 +916,7 @@ var game = {
             while (nextImage === matchingEmoji && startingRow-nextImagePosition > -1) {
                 if (!($("div[position=" + (startingRow - nextImagePosition) + "x" + startingColumn + "]").hasClass('readyToDestroy'))) {
                     $("div[position=" + (startingRow - nextImagePosition) + "x" + startingColumn + "]").addClass('readyToDestroy');
+                    game.score.tempScore += 10;
                     game.objectsToDestroyFromGameMap.push([startingColumn, (startingRow - nextImagePosition)]);
                 }
                 nextImagePosition++;
@@ -153,31 +924,39 @@ var game = {
                     nextImage = game.gameMap[startingColumn][startingRow - nextImagePosition].name;
                 }
             }
+            //game.score.tempScoreMultiplyer += (nextImagePosition - 3)
         } else {
             if (!($("div[position=" + startingRow + "x" + (startingColumn-2) + "]").hasClass('readyToDestroy'))) {
                 $("div[position=" + startingRow + "x" + (startingColumn-2) + "]").addClass('readyToDestroy');
                 game.objectsToDestroyFromGameMap.push([(startingColumn-2), (startingRow)]);
+                game.score.tempScore += 10;
+            } else {
+                game.score.tempScoreMultiplyer += 1;
             }
             if (!($("div[position=" + startingRow + "x" + (startingColumn-1) + "]").hasClass('readyToDestroy'))) {
                 $("div[position=" + startingRow + "x" + (startingColumn-1) + "]").addClass('readyToDestroy');
                 game.objectsToDestroyFromGameMap.push([(startingColumn-1), (startingRow)]);
+                game.score.tempScore += 10;
             }
             nextImage = matchingEmoji;
             nextImagePosition = 0;
             while (nextImage === matchingEmoji && startingColumn+nextImagePosition < 8) {
                 if (!($("div[position=" + startingRow + "x" + (startingColumn+nextImagePosition) + "]").hasClass('readyToDestroy'))) {
-                    $("div[position=" + startingRow + "x" + (startingColumn+nextImagePosition) + "]").addClass('readyToDestroy');
-                    game.objectsToDestroyFromGameMap.push([(startingColumn+nextImagePosition), (startingRow)]);
+                    $("div[position=" + startingRow + "x" + (startingColumn + nextImagePosition) + "]").addClass('readyToDestroy');
+                    game.objectsToDestroyFromGameMap.push([(startingColumn + nextImagePosition), (startingRow)]);
+                    game.score.tempScore += 10;
                 }
                 nextImagePosition++;
                 if (startingColumn+nextImagePosition < 8) {
                     nextImage = game.gameMap[startingColumn+nextImagePosition][startingRow].name;
                 }
             }
+            //game.score.tempScoreMultiplyer += (nextImagePosition - 1)
         }
     },
     destroyEmojis: function() {
         $(".readyToDestroy").empty();
+        game.score.updateScore();
     },
     collapse: function() {
 
@@ -185,13 +964,17 @@ var game = {
         game.generateRandomEmoji();  //Call the Method to create a random Emoji to fill in the newly created space
         //game.checkForMatches() //Call the checkForMatches Method to see if any new matches were made
     },
-
-
-    currentScore: 0,
-    highScore: 0,
-    displayCurrentScore: function() {},
-    updateScore: function() {
-        displayCurrentScore();
+    score: {
+        tempScore: 0,
+        tempScoreMultiplyer: 1,
+        currentScore: 0,
+        highScore: 0,
+        updateScore: function() {
+            game.score.currentScore += game.score.tempScore * game.score.tempScoreMultiplyer;
+            game.score.tempScore = 0;
+            game.score.tempScoreMultiplyer = 1;
+            $('#scoreSection').text("Score: " + game.score.currentScore);
+        }
     }
 };
 
@@ -199,7 +982,6 @@ function Emoji(name) {
     this.name = name;
 }
 $(document).ready(function () {
-
     $('#playButton').click(function () {
         $('#initialOverlay').hide();
         game.init();
