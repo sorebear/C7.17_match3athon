@@ -26,16 +26,11 @@ body{
 }
 #iphone > img {
     position: absolute;
-<<<<<<< HEAD
     right: 40%;
     z-index: -1;
     width: 24%;
-=======
-    right: 25%;
     height: 110%;
     top: -5%;
-    z-index: -1;
->>>>>>> 6cf61f1dd3289922b17dd4d79a7ba599bef77f54
 }
 #desk_space_left > img{
     height: 50%;
