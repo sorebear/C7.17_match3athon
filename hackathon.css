@@ -56,14 +56,72 @@ body{
     top: 20.3%;
     z-index: -1;
 }
+#initialOverlay{
+    width: 20.9%;
+    height: 75.4%;
+    position: absolute;
+    left: 37.48%;
+    top: 12.3%;
+    background: #0d69a3;
+    background-image: -webkit-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -moz-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -ms-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -o-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: linear-gradient(to bottom, #0d69a3, #19a7fa);
+}
+#initialOverlay > button{
+    background: #12e007;
+    background-image: -webkit-linear-gradient(top, #12e007, #099e38);
+    background-image: -moz-linear-gradient(top, #12e007, #099e38);
+    background-image: -ms-linear-gradient(top, #12e007, #099e38);
+    background-image: -o-linear-gradient(top, #12e007, #099e38);
+    background-image: linear-gradient(to bottom, #12e007, #099e38);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: Georgia;
+    color: #ffffff;
+    position: fixed;
+    top: 45%;
+    left:45%;
+    font-size: 32px;
+}
+#initialOverlay > button:hover{
+
+}
+#initialOverlay > button:focus{
+    outline: none;
+}
 #scoreSection{
-    width: 21%;
+    width: 20.9%;
     height: 8.1%;
     position: absolute;
     left: 37.5%;
     top: 12.2%;
     z-index: -1;
     text-align: center;
+    font-family: Phosphate;
+    font-size: xx-large;
+    background: #006eb8;
+    background-image: -webkit-linear-gradient(top, #006eb8, #28aafa);
+    background-image: -moz-linear-gradient(top, #006eb8, #28aafa);
+    background-image: -ms-linear-gradient(top, #006eb8, #28aafa);
+    background-image: -o-linear-gradient(top, #006eb8, #28aafa);
+    background-image: linear-gradient(to bottom, #006eb8, #28aafa);
+}
+#bottomBanner{
+    width: 20.9%;
+    height: 8.1%;
+    position: absolute;
+    left: 37.5%;
+    top: 79.5%;
+    z-index: -1;
+    background: #006eb8;
+    background-image: -moz-linear-gradient(top, #28aafa, #006eb8);
+    background-image: -ms-linear-gradient(top, #28aafa, #006eb8);
+    background-image: -o-linear-gradient(top, #28aafa, #006eb8);
+    background-image: linear-gradient(to bottom, #28aafa, #006eb8);
+
 }
 #highScore{
     position: absolute;
@@ -73,14 +131,18 @@ body{
     top:30.7%;
     left:10.9%;
     text-align: center;
+    font-size: large;
+    font-family: "Lucida Sans Typewriter";
+
 }
 #timer{
     position: absolute;
     top: 34.5%;
-    right: 14.5%;
+    right: 12.3%;
+    width: 8.5%;
 }
 #timer > img{
-    width: 135%;
+    width: 100%;
     transform: rotate(-25deg);
     animation:spin 60s linear infinite;
 }
