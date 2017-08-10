@@ -34,41 +34,45 @@ var game = {
 
 
     //VARIABLES AND METHODS FOR HANDLING EMOJI CLICKS
-    firstEmojiSelected: null, //A Boolean to track whether a click is the 1st or 2nd Emoji selected
+    firstEmojiSelected: null,
+    secondEmojiSelected: null,//A Boolean to track whether a click is the 1st or 2nd Emoji selected
     clickHandler: function() {
         $('#iphone').on('click', '.emojiContainer', function() {
             console.log('Emoji was clicked');
-            game.emojiSelector(); //A click handler that will call the emojiSelection Method on click
+            game.emojiSelector(this); //A click handler that will call the emojiSelection Method on click
         })
     },
-    emojiSelector: function() {
+    emojiSelector: function(emoji) {
         //Checks to see if this is the first or second emoji clicked
         console.log('in emoji Selector');
         if (game.firstEmojiSelected === null) {
-            //game.firstEmojiSelected  = $(this).click();
-            //game.firstSelection(firstEmojiSelected); //If there is already a first selection, launch the secondSelection Method
-
-            game.firstEmojiSelected = $(this).attr("position");
-            console.log(game.firstEmojiSelected);
+            game.firstSelection(emoji); //If there is already a first selection, launch the secondSelection Method
+            game.firstEmojiSelected = $(emoji).attr("position");
+            console.log('firstEmojiSelected assigned: ' + game.firstEmojiSelected);
             //game.firstSelection(this.firstEmojiSelected); //If there is already a first selection, launch the secondSelection Method
 
-        } else { //check if second Emoji is a valid selection
+        } else {
+            //check if second Emoji is a valid selection
+            //game.secondEmojiSelected = emoji;
+            console.log('second emoji assigned:  ' + game.secondEmojiSelected);
             //game.secondSelection(); //Otherwise, launch the firstSelection Method
-            //game.secondEmojiSelected = $(this).click();
+            game.secondEmojiSelected = $(emoji).attr("position");
             //game.secondSelection(); //Otherwise, launch the firstSelection Method ;;;secondEmojiSelected
 
         }
     },
-    firstSelection: function(imoji_object) {
-        //Do Stuff
+    firstSelection: function(emoji) {
         //1. Highlight the selected Emoji on the DOM in some way
 
-        //$(emoji_object).css('box-shadow: 0 0 1px  1px white;')   ;   //change to add class
 
-        $(emoji_object).css('box-shadow', '0 0 1px  1px white');      //change to add class
+        $(emoji).css('box-shadow', '0 0 2px  1px red');
+
+
+
+
 
         //2. Highlight all of the adjacent Emojis on the Dom in another way
-        //firstEmojiSelected = this; //Mark that a first emoji has been selected
+
     },
     secondSelection: function() {
         //Swap the two emojis on the DOM and in the array
@@ -162,8 +166,8 @@ var game = {
         game.generateRandomEmoji();  //Call the Method to create a random Emoji to fill in the newly created space
         //game.checkForMatches() //Call the checkForMatches Method to see if any new matches were made
     },
-    firstImojiSelected: null,
-    secondImojiSelected: null,
+
+
     currentScore: 0,
     highScore: 0,
     displayCurrentScore: function() {},
