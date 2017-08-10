@@ -76,8 +76,8 @@ body{
     background-image: -ms-linear-gradient(top, #12e007, #099e38);
     background-image: -o-linear-gradient(top, #12e007, #099e38);
     background-image: linear-gradient(to bottom, #12e007, #099e38);
-    -webkit-border-radius: 28;
-    -moz-border-radius: 28;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
     border-radius: 28px;
     font-family: Georgia;
     color: #ffffff;
