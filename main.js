@@ -179,3 +179,10 @@ var game = {
 function Emoji(name) {
     this.name = name;
 }
+$(document).ready(function () {
+
+    $('#playButton').click(function () {
+        $('#initialOverlay').hide();
+        game.init();
+    });
+});
