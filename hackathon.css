@@ -87,7 +87,8 @@ body{
     font-size: 32px;
 }
 #initialOverlay > button:hover{
-
+    animation: beat .6s infinite alternate;
+    transform-origin: center;
 }
 #initialOverlay > button:focus{
     outline: none;
@@ -146,4 +147,9 @@ body{
     transform: rotate(-25deg);
     animation:spin 60s linear infinite;
 }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@-webkit-keyframes spin
+{ 100% { -webkit-transform: rotate(360deg);
+}}
+@keyframes beat{
+    to { transform: scale(1.4); }
+}
