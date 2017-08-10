@@ -87,13 +87,28 @@ body{
     font-size: 32px;
     animation: beat .6s infinite alternate;
     transform-origin: center;
+
 }
 #initialOverlay > button:hover{
-
+    animation:spin .3s linear infinite;
+    transform-origin: center;
 }
 #initialOverlay > button:focus{
     outline: none;
 }
+#initialOverlay > #crush{
+    position: relative;
+    top: -10%;
+    left: -1%;
+    width: 106%;
+}
+#initialOverlay > #emoji{
+    position: relative;
+    top: 1%;
+    left: -1%;
+    width: 80%;
+}
+
 #scoreSection{
     width: 20.9%;
     height: 8.1%;
