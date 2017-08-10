@@ -618,7 +618,7 @@ var game = {
         game.objectsToDestroyFromGameMap = [];
         setTimeout(function () {
             game.collapse();
-        }, 500);
+        }, 200);
     },
     collapse: function() {
         for (var column = 0; column < 8; column ++) {
@@ -628,7 +628,7 @@ var game = {
                     while (row < 8 && $('[position=' + findNextImage + 'x' + column + ']').is(":empty")) {
                         findNextImage++
                     }
-                    $('[position=' + findNextImage + 'x' + column + '] > img').remove().appendTo($('[position=' + row + 'x' + column + ']'));
+                    $('[position=' + findNextImage + 'x' + column + '] > img').remove().appendTo($('[position=' + row + 'x' + column + ']')).css("animation","dropAnimation" + (findNextImage - row) + " .5s linear");
                 }
             }
         }
@@ -643,7 +643,7 @@ var game = {
                 var newEmoji = game.generateRandomEmoji();
                 game.gameMap[column][row] = newEmoji;
                 var newDiv = $("<div>").addClass("emojiContainer").attr("position", row +"x"+ column);
-                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg");
+                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg").css("animation", "dropAnimationTop .5s linear");
                 $("[position=" + row + "x" + column + "]").append(newImg);
             }
         }
@@ -672,5 +672,18 @@ $(document).ready(function () {
     $('#playButton').click(function () {
         $('#initialOverlay').hide();
         game.init();
+        $('#timer').css('animation', 'spin 60s linear');
+        setTimeout(function() {
+            $('#timer').css('animation','beat .5s infinite alternate');
+        }, 60000);
+        setTimeout(function () {
+            $('#finalScore').text(game.score.currentScore);
+            if (game.score.currentScore > 35,000) {
+                $('#winOrLose').text('You Got Tier 2!')
+            } else {
+                $('#winOrLose').text('Sorry, You Lost!')
+            }
+            $('#endGameOverlay').css('display','block');
+        }, 63000);
     });
 });

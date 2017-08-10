@@ -55,6 +55,7 @@ body{
     left: 37.48%;
     top: 20.3%;
     z-index: 0;
+    overflow: hidden;
 }
 #initialOverlay{
     width: 20.9%;
@@ -158,10 +159,9 @@ body{
     right: 12.3%;
     width: 8.5%;
 }
-#timer > img{
+#timer > img {
     width: 100%;
     transform: rotate(-25deg);
-    animation:spin 60s linear infinite;
 }
 @-webkit-keyframes spin
 { 100% { -webkit-transform: rotate(360deg);
@@ -174,4 +174,20 @@ body{
 }
 .to_be_selected {
     box-shadow: 0 0 2px  1px green;
+}
+
+#endGameOverlay{
+    color: white;
+    width: 20.9%;
+    height: 75.4%;
+    position: absolute;
+    left: 37.48%;
+    top: 12.3%;
+    background: #0d69a3;
+    background-image: -webkit-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -moz-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -ms-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: -o-linear-gradient(top, #0d69a3, #19a7fa);
+    background-image: linear-gradient(to bottom, #0d69a3, #19a7fa);
+    display: none;
 }

@@ -7,6 +7,47 @@
     width: 12.4%;
 }
 
-.readyToDestroy > img {
+.readyToDestroy {
     background-color: red;
 }
+
+@keyframes dropAnimationTop {
+    from {transform: translateY(-1000%)}
+    to {transform: translateY(0%)}
+}
+
+@keyframes dropAnimation1 {
+    from {transform: translateY(-125%)}
+    to {transform: translateY(0%)}
+}
+
+@keyframes dropAnimation2 {
+    from {transform: translateY(-250%)}
+    to {transform: translateY(0%)}
+}
+
+@keyframes dropAnimation3 {
+    from {transform: translateY(-375%)}
+    to {transform: translateY(0%)}
+}
+
+@keyframes dropAnimation4 {
+    from {transform: translateY(-500%)}
+    to {transform: translateY(0%)}
+}
+
+@keyframes dropAnimation5 {
+    from {transform: translateY(-625%)}
+    to {transform: translateY(0%)}
+}
+
+@keyframes dropAnimation6 {
+    from {transform: translateY(-750%)}
+    to {transform: translateY(0%)}
+}
+
+@keyframes dropAnimation7 {
+    from {transform: translateY(-875%)}
+    to {transform: translateY(0%)}
+}
+
