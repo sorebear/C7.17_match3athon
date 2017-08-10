@@ -544,22 +544,29 @@ var game = {
                     tempHoldImg2 = null;
                 }
             }
+            tempHoldImg=null;
+            tempHoldImg2=null;
         }
         setTimeout(function(){
             game.destroyEmojis();
             for (var i = 0; i < game.objectsToDestroyFromGameMap.length; i++) {
                 game.gameMap[game.objectsToDestroyFromGameMap[i][0]].splice(game.objectsToDestroyFromGameMap[i][1], 1);
             }
+            game.objectsToDestroyFromGameMap = [];
         }, 500);
     },
     setMatchedToBeDestroyed: function(startingRow, startingColumn, matchingEmoji, direction) {
         if (direction === 'vertical') {
             if (!($("div[position=" + startingRow + "x" + startingColumn + "]").hasClass('readyToDestroy'))) {
                 game.objectsToDestroyFromGameMap.push([startingColumn, startingRow]);
+                game.score.tempScore += 10;
                 $("div[position=" + startingRow + "x" + startingColumn + "]").addClass('readyToDestroy');
+            } else {
+                game.score.tempScoreMultiplyer += 1;
             }
             if (!($("div[position=" + (startingRow - 1) + "x" + startingColumn + "]").hasClass('readyToDestroy'))) {
                 game.objectsToDestroyFromGameMap.push([startingColumn, (startingRow-1)]);
+                game.score.tempScore += 10;
                 $("div[position=" + (startingRow - 1) + "x" + startingColumn + "]").addClass('readyToDestroy');
             }
             var nextImage = matchingEmoji;
@@ -567,6 +574,7 @@ var game = {
             while (nextImage === matchingEmoji && startingRow-nextImagePosition > -1) {
                 if (!($("div[position=" + (startingRow - nextImagePosition) + "x" + startingColumn + "]").hasClass('readyToDestroy'))) {
                     $("div[position=" + (startingRow - nextImagePosition) + "x" + startingColumn + "]").addClass('readyToDestroy');
+                    game.score.tempScore += 10;
                     game.objectsToDestroyFromGameMap.push([startingColumn, (startingRow - nextImagePosition)]);
                 }
                 nextImagePosition++;
@@ -574,31 +582,39 @@ var game = {
                     nextImage = game.gameMap[startingColumn][startingRow - nextImagePosition].name;
                 }
             }
+            //game.score.tempScoreMultiplyer += (nextImagePosition - 3)
         } else {
             if (!($("div[position=" + startingRow + "x" + (startingColumn-2) + "]").hasClass('readyToDestroy'))) {
                 $("div[position=" + startingRow + "x" + (startingColumn-2) + "]").addClass('readyToDestroy');
                 game.objectsToDestroyFromGameMap.push([(startingColumn-2), (startingRow)]);
+                game.score.tempScore += 10;
+            } else {
+                game.score.tempScoreMultiplyer += 1;
             }
             if (!($("div[position=" + startingRow + "x" + (startingColumn-1) + "]").hasClass('readyToDestroy'))) {
                 $("div[position=" + startingRow + "x" + (startingColumn-1) + "]").addClass('readyToDestroy');
                 game.objectsToDestroyFromGameMap.push([(startingColumn-1), (startingRow)]);
+                game.score.tempScore += 10;
             }
             nextImage = matchingEmoji;
             nextImagePosition = 0;
             while (nextImage === matchingEmoji && startingColumn+nextImagePosition < 8) {
                 if (!($("div[position=" + startingRow + "x" + (startingColumn+nextImagePosition) + "]").hasClass('readyToDestroy'))) {
-                    $("div[position=" + startingRow + "x" + (startingColumn+nextImagePosition) + "]").addClass('readyToDestroy');
-                    game.objectsToDestroyFromGameMap.push([(startingColumn+nextImagePosition), (startingRow)]);
+                    $("div[position=" + startingRow + "x" + (startingColumn + nextImagePosition) + "]").addClass('readyToDestroy');
+                    game.objectsToDestroyFromGameMap.push([(startingColumn + nextImagePosition), (startingRow)]);
+                    game.score.tempScore += 10;
                 }
                 nextImagePosition++;
                 if (startingColumn+nextImagePosition < 8) {
                     nextImage = game.gameMap[startingColumn+nextImagePosition][startingRow].name;
                 }
             }
+            //game.score.tempScoreMultiplyer += (nextImagePosition - 1)
         }
     },
     destroyEmojis: function() {
         $(".readyToDestroy").empty();
+        game.score.updateScore();
     },
     collapse: function() {
 
@@ -606,13 +622,17 @@ var game = {
         game.generateRandomEmoji();  //Call the Method to create a random Emoji to fill in the newly created space
         //game.checkForMatches() //Call the checkForMatches Method to see if any new matches were made
     },
-
-
-    currentScore: 0,
-    highScore: 0,
-    displayCurrentScore: function() {},
-    updateScore: function() {
-        displayCurrentScore();
+    score: {
+        tempScore: 0,
+        tempScoreMultiplyer: 1,
+        currentScore: 0,
+        highScore: 0,
+        updateScore: function() {
+            game.score.currentScore += game.score.tempScore * game.score.tempScoreMultiplyer;
+            game.score.tempScore = 0;
+            game.score.tempScoreMultiplyer = 1;
+            $('#scoreSection').text("Score: " + game.score.currentScore);
+        }
     }
 };
 
@@ -620,7 +640,6 @@ function Emoji(name) {
     this.name = name;
 }
 $(document).ready(function () {
-
     $('#playButton').click(function () {
         $('#initialOverlay').hide();
         game.init();

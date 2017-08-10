@@ -76,23 +76,39 @@ body{
     background-image: -ms-linear-gradient(top, #12e007, #099e38);
     background-image: -o-linear-gradient(top, #12e007, #099e38);
     background-image: linear-gradient(to bottom, #12e007, #099e38);
-    -webkit-border-radius: 28;
-    -moz-border-radius: 28;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
     border-radius: 28px;
     font-family: Georgia;
     color: #ffffff;
     position: fixed;
     top: 45%;
-    left:45%;
+    left:44.5%;
     font-size: 32px;
+    animation: beat .6s infinite alternate;
+    transform-origin: center;
+
 }
 #initialOverlay > button:hover{
-    animation: beat .6s infinite alternate;
+    animation:spin .3s linear infinite;
     transform-origin: center;
 }
 #initialOverlay > button:focus{
     outline: none;
 }
+#initialOverlay > #crush{
+    position: relative;
+    top: -10%;
+    left: -1%;
+    width: 106%;
+}
+#initialOverlay > #emoji{
+    position: relative;
+    top: 1%;
+    left: -1%;
+    width: 80%;
+}
+
 #scoreSection{
     width: 20.9%;
     height: 8.1%;
