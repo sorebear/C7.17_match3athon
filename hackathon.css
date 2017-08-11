@@ -121,11 +121,9 @@ body{
     -webkit-border-radius: 28px;
     -moz-border-radius: 28px;
     border-radius: 28px;
-    font-family: 'Georgia';
+    font-family: 'Georgia', serif;
     color: #ffffff;
-    position: absolute;
-    top: 45%;
-    left: 31%;
+    position: relative;
     font-size: 32px;
     animation: beat .6s infinite alternate;
     transform-origin: center;
@@ -158,7 +156,7 @@ body{
     top: 12.2%;
     z-index: 0;
     text-align: center;
-    font-family: Phosphate;
+    font-family: 'Phosphate', sans-serif;
     font-size: xx-large;
     background: #006eb8;
     background-image: -webkit-linear-gradient(top, #006eb8, #28aafa);
@@ -190,7 +188,7 @@ body{
     left:10.9%;
     text-align: center;
     font-size: large;
-    font-family: "Lucida Sans Typewriter";
+    font-family: "Lucida Sans Typewriter", sans-serif;
 
 }
 #timer{
@@ -241,7 +239,6 @@ body{
     position: absolute;
     left: 37.48%;
     top: 12.3%;
-    
     background: #0d69a3;
     background-image: -webkit-linear-gradient(top, #0d69a3, #19a7fa);
     background-image: -moz-linear-gradient(top, #0d69a3, #19a7fa);
@@ -272,11 +269,10 @@ body{
     -webkit-border-radius: 28px;
     -moz-border-radius: 28px;
     border-radius: 28px;
-    font-family: 'Georgia';
+    font-family: 'Georgia', Serif;
     color: #ffffff;
-    position: absolute;
-    top: 91%;
-    left: 34%;
+    position: relative;
+    top: 30vh;
     font-size: x-large;
 }
 #endGameOverlay > button:focus{
