@@ -40,7 +40,6 @@ var game = {
     firstEmojiSelected: null,
     secondEmojiSelected: null,//A Boolean to track whether a click is the 1st or 2nd Emoji selected
     firstEmojiSelectedPosition: null,
-    secondEmojiOptions: [],
     clickHandler: function() {
         $('#iphoneScreen').on('click', '.emojiContainer', function() {
             console.log('Emoji was clicked');
@@ -79,19 +78,15 @@ var game = {
         console.log(tempRow + "x" + tempColumn);
         if (tempRow < 7) {
             $("[position=" + (tempRow + 1) + "x" + tempColumn + "]").addClass('to_be_selected');
-            game.secondEmojiOptions.push([tempRow + 1, tempColumn]);
         }
         if (tempRow > 0) {
             $("[position=" + (tempRow - 1) + "x" + tempColumn + "]").addClass('to_be_selected');
-            game.secondEmojiOptions.push([tempRow - 1, tempColumn]);
         }
         if (tempColumn < 7) {
             $("[position=" + tempRow + "x" + (tempColumn + 1) + "]").addClass('to_be_selected');
-            game.secondEmojiOptions.push([tempRow, tempColumn + 1]);
         }
         if (tempColumn > 0) {
             $("[position=" + tempRow + "x" + (tempColumn - 1) + "]").addClass('to_be_selected');
-            game.secondEmojiOptions.push([tempRow, tempColumn - 1]);
         }
     },
     secondSelection: function() {
@@ -340,6 +335,31 @@ $(document).ready(function () {
                 }
                 game.score.currentScore = 0;
                 game.reset();
+                $('#timer').css('animation', 'spin 60s linear');
+                setTimeout(function () {
+                    $('#timer').css('animation', 'beat .5s infinite alternate');
+                }, 60000);
+                setTimeout(function () {
+                    $('#finalScore').text(game.score.currentScore);
+                    $('#endGameOverlay').css('display', 'block');
+                    $('#tier1').hide();
+                    $('#tier2').hide();
+                    $('#tier3').hide();
+                    $('#loser').hide();
+                    if (game.score.currentScore >= 3000) {
+                        $('#winOrLose').text('You Got Tier 1!');
+                        $('#tier1').show();
+                    } else if (game.score.currentScore >= 2000) {
+                        $('#winOrLose').text('You Got Tier 2!');
+                        $('#tier2').show();
+                    } else if (game.score.currentScore > 1500) {
+                        $('#winOrLose').text('You Got Tier 3!');
+                        $('#tier3').show();
+                    } else {
+                        $('#winOrLose').text('You Lose!');
+                        $('#loser').show();
+                    }
+                }, 63000);
             })
         }, 63000);
     });
