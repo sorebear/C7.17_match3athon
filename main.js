@@ -298,6 +298,10 @@ function Emoji(name) {
     this.name = name;
 }
 $(document).ready(function () {
+    $('#tier1').hide();
+    $('#tier2').hide();
+    $('#tier3').hide();
+    $('#loser').hide();
     $('#playButton').click(function () {
         $('#initialOverlay').hide();
         game.init();
@@ -307,20 +311,36 @@ $(document).ready(function () {
         }, 60000);
         setTimeout(function () {
             $('#finalScore').text(game.score.currentScore);
-            if (game.score.currentScore > 5,000) {
-                $('#winOrLose').text('You Got Tier 1!')
-            }if (game.score.currentScore > 3,500) {
-                $('#winOrLose').text('You Got Tier 2!')
-            }if (game.score.currentScore > 2,500) {
-                $('#winOrLose').text('You Got Tier 3!')
+            if (game.score.currentScore >= 3000) {
+                $('#winOrLose').text('You Got Tier 1!');
+                $('#tier1').show();
+                $('#tier2').hide();
+                $('#tier3').hide();
+                $('#loser').hide();
+            }if (game.score.currentScore >= 2000) {
+                $('#winOrLose').text('You Got Tier 2!');
+                $('#tier2').show();
+                $('#tier3').hide();
+                $('#loser').hide();
+
+            }if (game.score.currentScore > 1500) {
+                $('#winOrLose').text('You Got Tier 3!');
+                $('#tier3').show();
             }else {
-                $('#winOrLose').text('You Lose!')
+                $('#winOrLose').text('You Lose!');
+                $('#loser').show();
             }
             $('#endGameOverlay').css('display','block');
-            $('.resetButton').on('click', function() {
-                $('#endGameOverlay').hide();
-                game.reset();
-            })
         }, 63000);
     });
+});
+$(document).ready(function () {
+    $('#resetButton').click(function () {
+        $('#endGameOverlay').hide();
+        game.reset();
+        $('#timer').css('animation', 'spin 60s linear');
+        setTimeout(function() {
+            $('#timer').css('animation','beat .5s infinite alternate');
+        }, 60000);
+    })
 });
