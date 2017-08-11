@@ -319,8 +319,11 @@ $(document).ready(function () {
             $('#endGameOverlay').css('display','block');
             $('.resetButton').on('click', function() {
                 $('#endGameOverlay').hide();
+                if (game.score.currentScore > $('#highScore').text())
+                $('#highScore').text(game.score.currentScore);
+                game.score.currentScore = 0;
                 game.reset();
             })
-        }, 63000);
+        }, 6300);
     });
 });
