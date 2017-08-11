@@ -314,14 +314,9 @@ $(document).ready(function () {
             if (game.score.currentScore >= 3000) {
                 $('#winOrLose').text('You Got Tier 1!');
                 $('#tier1').show();
-                $('#tier2').hide();
-                $('#tier3').hide();
-                $('#loser').hide();
             }if (game.score.currentScore >= 2000) {
                 $('#winOrLose').text('You Got Tier 2!');
                 $('#tier2').show();
-                $('#tier3').hide();
-                $('#loser').hide();
 
             }if (game.score.currentScore > 1500) {
                 $('#winOrLose').text('You Got Tier 3!');
