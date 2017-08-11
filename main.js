@@ -116,23 +116,7 @@ var game = {
 
         console.log(game.firstPosition);
 
-            // if (tempRow < 7) {
-            //     $("[position=" + (tempRow + 1) + "x" + tempColumn + "]");
-            //     var firstPosition =  $("[position=" + (tempRow + 1) + "x" + tempColumn + "]");
-            // }
-            // if (tempRow > 0) {
-            //     $("[position=" + (tempRow - 1) + "x" + tempColumn + "]");
-            //     firstPosition =  $("[position=" + (tempRow - 1) + "x" + tempColumn + "]");
-            // }
-            // if (tempColumn < 7) {
-            //     $("[position=" + tempRow + "x" + (tempColumn + 1) + "]");
-            //     firstPosition =  $("[position=" + tempRow + "x" + (tempColumn + 1) + "]");
-            // }
-            // if (tempColumn > 0) {
-            //     $("[position=" + tempRow + "x" + (tempColumn - 1) + "]");
-            //     firstPosition = $("[position=" + tempRow + "x" + (tempColumn - 1) + "]");
-            //
-            // }
+
 
             if(firstPosition === game.firstPosition || firstPosition === game.secondPosition || firstPosition === game.thirdPosition || firstPosition === game.fourthPositon){
                 console.log('true');
