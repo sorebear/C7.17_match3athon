@@ -94,8 +94,6 @@ var game = {
             game.secondEmojiOptions.push([tempRow, tempColumn - 1]);
         }
     },
-
-
     secondSelection: function() {
         var firstPosition = game.firstEmojiSelected.attr('position');
         var secondPosition = game.secondEmojiSelected.attr('position');
@@ -117,6 +115,8 @@ var game = {
                 typeofTransition = ['bottomToTop', 'topToBottom'];
             }
         }
+        game.firstEmojiSelected.find('img').css('animation','none');
+        game.secondEmojiSelected.find('img').css('animation','none');
         var tempDomHolder = ($(game.firstEmojiSelected).find('img'));
         game.firstEmojiSelected.empty().append(game.secondEmojiSelected.find('img').css('animation', typeofTransition[1] + "Swap .4s linear"));
         game.secondEmojiSelected.empty().append(tempDomHolder).css('animation', typeofTransition[0] + "Swap .4s linear");
@@ -124,9 +124,13 @@ var game = {
         game.gameMap[firstColumn][firstRow] = game.gameMap[secondColumn][secondRow];
         game.gameMap[secondColumn][secondRow] = tempArrayHolder;
         $('div').removeClass('selected to_be_selected');
-        game.firstEmojiSelected = null;
-        game.secondEmojiSelected = null;
-        game.checkForMatches();
+        $('#iphoneScreen').off('click');
+        setTimeout(function () {
+            game.firstEmojiSelected = null;
+            game.secondEmojiSelected = null;
+            game.checkForMatches();
+        }, 500);
+        return true;
     },
     checkForMatches: function() {
         var tempHoldImg = null;
@@ -175,15 +179,16 @@ var game = {
             tempHoldImg2=null;
         }
         if (game.objectsToDestroyFromGameMap.length === 0) {
+            console.log('I am done running');
+            game.clickHandler();
             return false;
-            console.log("I am done running");
         } else {
             setTimeout(function () {
                 for (var i = 0; i < game.objectsToDestroyFromGameMap.length; i++) {
                     game.gameMap[game.objectsToDestroyFromGameMap[i][0]].splice(game.objectsToDestroyFromGameMap[i][1], 1);
                 }
                 game.destroyEmojis();
-            }, 500);
+            }, 450);
             return true;
         }
     },
@@ -248,7 +253,7 @@ var game = {
         game.objectsToDestroyFromGameMap = [];
         setTimeout(function () {
             game.collapse();
-        }, 200);
+        }, 500);
     },
     collapse: function() {
         for (var column = 0; column < 8; column ++) {
@@ -265,7 +270,6 @@ var game = {
         setTimeout(function () {
             game.repopulate();
         }, 500);
-
     },
     repopulate: function() {
         for (var column = 0; column < 8; column++) {
@@ -273,7 +277,7 @@ var game = {
                 var newEmoji = game.generateRandomEmoji();
                 game.gameMap[column][row] = newEmoji;
                 var newDiv = $("<div>").addClass("emojiContainer").attr("position", row +"x"+ column);
-                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg").css("animation", "dropAnimationTop .5s linear");
+                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg").css("animation", "dropAnimationTop .45s linear");
                 $("[position=" + row + "x" + column + "]").append(newImg);
             }
         }
@@ -286,7 +290,7 @@ var game = {
         tempScoreMultiplyer: 1,
         currentScore: 0,
         highScore: 0,
-        updateScore: function() {
+        updateScore: function () {
             game.score.currentScore += game.score.tempScore * game.score.tempScoreMultiplyer;
             game.score.tempScore = 0;
             game.score.tempScoreMultiplyer = 1;
@@ -311,6 +315,11 @@ $(document).ready(function () {
         }, 60000);
         setTimeout(function () {
             $('#finalScore').text(game.score.currentScore);
+            $('#endGameOverlay').css('display', 'block');
+            $('#tier1').hide();
+            $('#tier2').hide();
+            $('#tier3').hide();
+            $('#loser').hide();
             if (game.score.currentScore >= 3000) {
                 $('#winOrLose').text('You Got Tier 1!');
                 $('#tier1').show();
@@ -325,11 +334,11 @@ $(document).ready(function () {
                 $('#winOrLose').text('You Lose!');
                 $('#loser').show();
             }
-            $('#endGameOverlay').css('display', 'block');
-            $('.resetButton').on('click', function () {
+            $('#resetButton').on('click', function() {
                 $('#endGameOverlay').hide();
-                if (game.score.currentScore > $('#highScore').text())
-                    $('#highScore').text(game.score.currentScore);
+                if (game.score.currentScore > parseInt($('#highScoreNumber').text())) {
+                    $('#highScoreNumber').text(game.score.currentScore);
+                }
                 game.score.currentScore = 0;
                 game.reset();
             })
