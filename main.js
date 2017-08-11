@@ -7,6 +7,10 @@ var game = {
     init: function() {
         //Will map out the Emoji objects onto the map
         game.clickHandler(); //Initializes the clickHandler on game start.
+        game.reset();
+    },
+    reset: function() {
+        $('#iphoneScreen').empty();
         for (var startRow = 7; startRow > -1; startRow--) {
             for (var startColumn = 0; startColumn < 8; startColumn++) {
                 var newEmoji = game.generateRandomEmoji();
@@ -36,12 +40,7 @@ var game = {
     firstEmojiSelected: null,
     secondEmojiSelected: null,//A Boolean to track whether a click is the 1st or 2nd Emoji selected
     firstEmojiSelectedPosition: null,
-    secondEmojiSelectedPosition: null,
-    firstPosition: '',
-    secondPosition: '',
-    thirdPosition: '',
-    fourthPositon: '',
-
+    secondEmojiOptions: [],
     clickHandler: function() {
         $('#iphoneScreen').on('click', '.emojiContainer', function() {
             console.log('Emoji was clicked');
@@ -55,98 +54,80 @@ var game = {
             game.firstEmojiSelected = $(emoji);//.attr("position");
             game.firstEmojiSelectedPosition = $(emoji).attr("position");
             game.firstSelection(emoji); //If there is already a first selection, launch the secondSelection Method
-
              //If there is already a first selection, launch the secondSelection Method
-
         } else {
             //check if second Emoji is a valid selection
-
-
-            game.secondSelection(); //Otherwise, launch the firstSelection Method
-
-            game.secondEmojiSelected = $(emoji);//.attr("position");
-            game.secondEmojiSelectedPosition = $(emoji).attr("position");
-            //Otherwise, launch the firstSelection Method
-
-            //game.secondEmojiSelectedPosition = $(emoji).attr("position");
-
-
-
-
-            console.log('second emoji assigned:  ' + game.secondEmojiSelected);
-
+            if ($(emoji).hasClass('to_be_selected')) {
+                game.secondEmojiSelected = $(emoji);
+                game.secondSelection();
+                return
+            } else {
+                $('div').removeClass('selected to_be_selected');
+                game.firstEmojiSelected = $(emoji);//.attr("position");
+                game.firstEmojiSelectedPosition = $(emoji).attr("position");
+                game.firstSelection(emoji); //If there is already a first selection, launch the secondSelection Method
+            }
         }
     },
     firstSelection: function(emoji) {
         //1. Highlight the selected Emoji on the DOM in some way
-
-
         $(emoji).addClass('selected');
         console.log('first selcetion  '+ emoji);
-
-
         //2. Highlight all of the adjacent Emojis on the Dom in another way
-
         var tempRow = parseInt(game.firstEmojiSelectedPosition.substr(0,1));
         var tempColumn = parseInt(game.firstEmojiSelectedPosition.substr(2,1));
         console.log(tempRow + "x" + tempColumn);
-
         if (tempRow < 7) {
             $("[position=" + (tempRow + 1) + "x" + tempColumn + "]").addClass('to_be_selected');
-            game.firstPosition = (tempRow + 1) + "x" + tempColumn;
+            game.secondEmojiOptions.push([tempRow + 1, tempColumn]);
         }
         if (tempRow > 0) {
             $("[position=" + (tempRow - 1) + "x" + tempColumn + "]").addClass('to_be_selected');
-            game.secondPosition = (tempRow - 1) + "x" + tempColumn;
+            game.secondEmojiOptions.push([tempRow - 1, tempColumn]);
         }
         if (tempColumn < 7) {
             $("[position=" + tempRow + "x" + (tempColumn + 1) + "]").addClass('to_be_selected');
-            //game.thirdPosition =  $("[position=" + tempRow + "x" + (tempColumn + 1) + "]".attr("position"));
+            game.secondEmojiOptions.push([tempRow, tempColumn + 1]);
         }
         if (tempColumn > 0) {
             $("[position=" + tempRow + "x" + (tempColumn - 1) + "]").addClass('to_be_selected');
-            //game.fourthPositon = $("[position=" + tempRow + "x" + (tempColumn - 1) + "]").attr("position");
-
+            game.secondEmojiOptions.push([tempRow, tempColumn - 1]);
         }
     },
-    secondSelection: function(emoji) {
-        // var tempRow = parseInt(game.secondEmojiSelectedPosition.substr(0,1));
-        // var tempColumn = parseInt(game.secondEmojiSelectedPosition.substr(2,1));
-        console.log('in second selection function');
-
-        console.log(game.firstPosition);
 
 
-
-            if(firstPosition === game.firstPosition || firstPosition === game.secondPosition || firstPosition === game.thirdPosition || firstPosition === game.fourthPositon){
-                console.log('true');
-
-            }else if(firstPosition){
-
+    secondSelection: function() {
+        var firstPosition = game.firstEmojiSelected.attr('position');
+        var secondPosition = game.secondEmojiSelected.attr('position');
+        var firstRow = firstPosition.substr(0, 1);
+        var firstColumn = firstPosition.substr(2, 1);
+        var secondRow = secondPosition.substr(0, 1);
+        var secondColumn = secondPosition.substr(2,1);
+        var typeofTransition = null;
+        if (firstRow === secondRow) {
+            if (firstColumn > secondColumn) {
+                typeofTransition = ['rightToLeft','leftToRight']
+            } else {
+                typeofTransition = ['leftToRight','rightToLeft']
             }
-            else {
-                console.log(tempRow + "x" + tempColumn);
-                $(game.firstPosition).removeClass('to_be_selected');
-                $(game.secondPosition).removeClass('to_be_selected');
-                $(game.thirdPosition).removeClass('to_be_selected');
-                $(game.fourthPositon).removeClass('to_be_selected');
-                $(game.firstEmojiSelected).removeClass('selected');
-                game.firstEmojiSelected = null;
+        } else {
+            if (firstRow > secondRow) {
+                typeofTransition = ['topToBottom', 'bottomToTop'];
+            } else {
+                typeofTransition = ['bottomToTop', 'topToBottom'];
             }
-
-
-
-
-        //Swap the two emojis on the DOM and in the array
-
-
-
         }
-
-        //game.checkForMatches(); //Check to see if a match was made.
-
-        //game.firstEmojiSelected = null; //Re-Initialize the firstSelection boolean
-    ,
+        var tempDomHolder = ($(game.firstEmojiSelected).find('img'));
+        game.firstEmojiSelected.empty().append(game.secondEmojiSelected.find('img').css('animation', typeofTransition[1] + "Swap .4s linear"));
+        game.secondEmojiSelected.empty().append(tempDomHolder).css('animation', typeofTransition[0] + "Swap .4s linear");
+        var tempArrayHolder = game.gameMap[firstColumn][firstRow];
+        game.gameMap[firstColumn][firstRow] = game.gameMap[secondColumn][secondRow];
+        game.gameMap[secondColumn][secondRow] = tempArrayHolder;
+        $('div').removeClass('selected to_be_selected');
+        game.firstEmojiSelected = null;
+        game.secondEmojiSelected = null;
+        game.checkForMatches();
+    },
     checkForMatches: function() {
         var tempHoldImg = null;
         var tempHoldImg2 = null;
@@ -313,7 +294,6 @@ var game = {
         }
     }
 };
-
 function Emoji(name) {
     this.name = name;
 }
@@ -333,6 +313,10 @@ $(document).ready(function () {
                 $('#winOrLose').text('Sorry, You Lost!')
             }
             $('#endGameOverlay').css('display','block');
+            $('.resetButton').on('click', function() {
+                $('#endGameOverlay').hide();
+                game.reset();
+            })
         }, 63000);
     });
 });

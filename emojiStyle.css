@@ -8,7 +8,8 @@
 }
 
 .readyToDestroy {
-    background-color: red;
+    animation: spin .5s;
+
 }
 
 @keyframes dropAnimationTop {
@@ -50,4 +51,25 @@
     from {transform: translateY(-875%)}
     to {transform: translateY(0%)}
 }
+@keyframes leftToRightSwap {
+    from {transform: translateX(-100%)}
+    to {transform: translateX(0%)}
+}
 
+@keyframes rightToLeftSwap {
+    from {transform: translateX(100%)}
+    to {transform: translateX(0%)}
+}
+
+@keyframes topToBottomSwap {
+    from {transform: translateY(-125%)}
+    to {transform: translateY(0%)}
+}
+
+@keyframes bottomToTopSwap {
+    from {transform: translateY(125%)}
+    to {transform: translateY(0%)}
+}
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(360deg)
+    } to { transform: scale(.1);}}
