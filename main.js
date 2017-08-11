@@ -94,6 +94,8 @@ var game = {
             game.secondEmojiOptions.push([tempRow, tempColumn - 1]);
         }
     },
+
+
     secondSelection: function() {
         var firstPosition = game.firstEmojiSelected.attr('position');
         var secondPosition = game.secondEmojiSelected.attr('position');

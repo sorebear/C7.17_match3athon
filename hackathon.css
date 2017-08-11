@@ -228,12 +228,18 @@ body{
 
 
 #endGameOverlay{
-    color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 33px;
+    color: #00de00;
+    text-transform: uppercase;
+    #color: white;
+    text-shadow: 0 0 25px darkblue;
     width: 20.9%;
     height: 75.4%;
     position: absolute;
     left: 37.48%;
     top: 12.3%;
+    
     background: #0d69a3;
     background-image: -webkit-linear-gradient(top, #0d69a3, #19a7fa);
     background-image: -moz-linear-gradient(top, #0d69a3, #19a7fa);
