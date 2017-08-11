@@ -324,6 +324,6 @@ $(document).ready(function () {
                 game.score.currentScore = 0;
                 game.reset();
             })
-        }, 6300);
+        }, 63000);
     });
 });
