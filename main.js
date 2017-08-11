@@ -22,7 +22,7 @@ var game = {
             }
         }
     },
-    emojiArray: ["cool", "happy", "evil", "hearteyes"], //This will hold all of the different types of Emoji's
+    emojiArray: ["cool", "happy", "evil", "hearteyes", "laugh"], //This will hold all of the different types of Emoji's
     specialEmojiArray:[],
     //DESIGN SYNCH UP REQUIRED - Make sure the image names and the names in the Emoji Array are the same
     generateEmoji: function(name) {
@@ -40,7 +40,7 @@ var game = {
     firstEmojiSelected: null,
     secondEmojiSelected: null,//A Boolean to track whether a click is the 1st or 2nd Emoji selected
     firstEmojiSelectedPosition: null,
-    secondEmojiOptions: [],
+    //secondEmojiOptions: [],
     clickHandler: function() {
         $('#iphoneScreen').on('click', '.emojiContainer', function() {
             console.log('Emoji was clicked');
@@ -268,7 +268,7 @@ var game = {
 
     },
     repopulate: function() {
-        for (var column = 0; column < 8; column ++) {
+        for (var column = 0; column < 8; column++) {
             for (var row = game.gameMap[column].length; row < 8; row++) {
                 var newEmoji = game.generateRandomEmoji();
                 game.gameMap[column][row] = newEmoji;
@@ -306,37 +306,33 @@ $(document).ready(function () {
         $('#initialOverlay').hide();
         game.init();
         $('#timer').css('animation', 'spin 60s linear');
-        setTimeout(function() {
-            $('#timer').css('animation','beat .5s infinite alternate');
+        setTimeout(function () {
+            $('#timer').css('animation', 'beat .5s infinite alternate');
         }, 60000);
         setTimeout(function () {
             $('#finalScore').text(game.score.currentScore);
             if (game.score.currentScore >= 3000) {
                 $('#winOrLose').text('You Got Tier 1!');
                 $('#tier1').show();
-            }if (game.score.currentScore >= 2000) {
+            } else if (game.score.currentScore >= 2000) {
                 $('#winOrLose').text('You Got Tier 2!');
                 $('#tier2').show();
 
-            }if (game.score.currentScore > 1500) {
+            } else if (game.score.currentScore > 1500) {
                 $('#winOrLose').text('You Got Tier 3!');
                 $('#tier3').show();
-            }else {
+            } else {
                 $('#winOrLose').text('You Lose!');
                 $('#loser').show();
             }
-            $('#endGameOverlay').css('display','block');
+            $('#endGameOverlay').css('display', 'block');
+            $('.resetButton').on('click', function () {
+                $('#endGameOverlay').hide();
+                if (game.score.currentScore > $('#highScore').text())
+                    $('#highScore').text(game.score.currentScore);
+                game.score.currentScore = 0;
+                game.reset();
+            })
         }, 63000);
-
     });
-});
-$(document).ready(function () {
-    $('#resetButton').click(function () {
-        $('#endGameOverlay').hide();
-        game.reset();
-        $('#timer').css('animation', 'spin 60s linear');
-        setTimeout(function() {
-            $('#timer').css('animation','beat .5s infinite alternate');
-        }, 60000);
-    })
 });
