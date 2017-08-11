@@ -305,10 +305,14 @@ $(document).ready(function () {
         }, 60000);
         setTimeout(function () {
             $('#finalScore').text(game.score.currentScore);
-            if (game.score.currentScore > 35,000) {
+            if (game.score.currentScore > 5,000) {
+                $('#winOrLose').text('You Got Tier 1!')
+            }if (game.score.currentScore > 3,500) {
                 $('#winOrLose').text('You Got Tier 2!')
-            } else {
-                $('#winOrLose').text('Sorry, You Lost!')
+            }if (game.score.currentScore > 2,500) {
+                $('#winOrLose').text('You Got Tier 3!')
+            }else {
+                $('#winOrLose').text('You Lose!')
             }
             $('#endGameOverlay').css('display','block');
             $('.resetButton').on('click', function() {

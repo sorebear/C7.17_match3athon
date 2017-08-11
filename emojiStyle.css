@@ -8,7 +8,7 @@
 }
 
 .readyToDestroy {
-    animation: spin .5s;
+    animation: spin2 .5s;
 
 }
 
@@ -71,5 +71,5 @@
     to {transform: translateY(0%)}
 }
 @-webkit-keyframes spin2 {
-    from { -webkit-transform: rotate(360deg)
-    } to { transform: scale(.1);}}
+    from { -webkit-transform: rotate(0deg)}
+    to {  -webkit-transform: rotate(360deg) scale(.1);}}
