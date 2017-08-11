@@ -332,6 +332,7 @@ $(document).ready(function () {
             }
             $('#endGameOverlay').css('display','block');
         }, 63000);
+
     });
 });
 $(document).ready(function () {
