@@ -84,6 +84,10 @@ body{
     text-decoration: underline;
     font-size: medium;
 }
+#post_it_note > #postittext > p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
 #iphoneScreen{
     width: 20.9%;
@@ -121,7 +125,7 @@ body{
     color: #ffffff;
     position: absolute;
     top: 45%;
-    left: 34%;
+    left: 31%;
     font-size: 32px;
     animation: beat .6s infinite alternate;
     transform-origin: center;
@@ -228,12 +232,10 @@ body{
 
 
 #endGameOverlay{
-    font-family: 'Fredoka One', cursive;
-    font-size: 33px;
+    font-family: 'Saira', sans-serif;;
+    font-size: large;
     color: #00de00;
     text-transform: uppercase;
-    #color: white;
-    text-shadow: 0 0 25px darkblue;
     width: 20.9%;
     height: 75.4%;
     position: absolute;
@@ -248,7 +250,18 @@ body{
     background-image: linear-gradient(to bottom, #0d69a3, #19a7fa);
     display: none;
 }
-
+#endGameOverlay > #tierHolder{
+    position: absolute;
+    width: 80%;
+    height: 23%;
+    left: 10.5%;
+}
+#endGameOverlay > #tierHolder > img{
+    position: absolute;
+    width: 57%;
+    bottom: 3%;
+    right: 20%;
+}
 #endGameOverlay > button {
     background: #12e007;
     background-image: -webkit-linear-gradient(top, #12e007, #099e38);
@@ -262,9 +275,9 @@ body{
     font-family: 'Georgia';
     color: #ffffff;
     position: absolute;
-    top: 45%;
+    top: 91%;
     left: 34%;
-    font-size: 32px;
+    font-size: x-large;
 }
 #endGameOverlay > button:focus{
     outline: none;
