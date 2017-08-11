@@ -7,12 +7,16 @@ var game = {
     init: function() {
         //Will map out the Emoji objects onto the map
         game.clickHandler(); //Initializes the clickHandler on game start.
+        game.reset();
+    },
+    reset: function() {
+        $('#iphoneScreen').empty();
         for (var startRow = 7; startRow > -1; startRow--) {
             for (var startColumn = 0; startColumn < 8; startColumn++) {
                 var newEmoji = game.generateRandomEmoji();
                 game.gameMap[startColumn][startRow] = newEmoji;
                 var newDiv = $("<div>").addClass("emojiContainer").attr("position", startRow +"x"+ startColumn);
-                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg").addClass("h" + startRow +"x"+ startColumn);
+                var newImg = $("<img>").attr("src", "images/" + newEmoji.name + ".png").addClass("emojiImg");
                 newDiv.append(newImg);
                 $('#iphoneScreen').append(newDiv);
             }
@@ -36,6 +40,7 @@ var game = {
     firstEmojiSelected: null,
     secondEmojiSelected: null,//A Boolean to track whether a click is the 1st or 2nd Emoji selected
     firstEmojiSelectedPosition: null,
+    secondEmojiOptions: [],
     clickHandler: function() {
         $('#iphoneScreen').on('click', '.emojiContainer', function() {
             console.log('Emoji was clicked');
@@ -49,455 +54,78 @@ var game = {
             game.firstEmojiSelected = $(emoji);//.attr("position");
             game.firstEmojiSelectedPosition = $(emoji).attr("position");
             game.firstSelection(emoji); //If there is already a first selection, launch the secondSelection Method
-
-            console.log('first emoji assigned:  ' + emoji);
              //If there is already a first selection, launch the secondSelection Method
-
         } else {
             //check if second Emoji is a valid selection
-
-            game.secondSelection(); //Otherwise, launch the firstSelection Method
-            game.secondEmojiSelected = $(emoji);//.attr("position");
-            //game.secondEmojiSelectedPosition = $(emoji).attr("position");
-            console.log('second emoji assigned:  ' + game.secondEmojiSelected);
+            if ($(emoji).hasClass('to_be_selected')) {
+                game.secondEmojiSelected = $(emoji);
+                game.secondSelection();
+                return
+            } else {
+                $('div').removeClass('selected to_be_selected');
+                game.firstEmojiSelected = $(emoji);//.attr("position");
+                game.firstEmojiSelectedPosition = $(emoji).attr("position");
+                game.firstSelection(emoji); //If there is already a first selection, launch the secondSelection Method
+            }
         }
     },
     firstSelection: function(emoji) {
         //1. Highlight the selected Emoji on the DOM in some way
-
-
         $(emoji).addClass('selected');
         console.log('first selcetion  '+ emoji);
-
-
         //2. Highlight all of the adjacent Emojis on the Dom in another way
-
         var tempRow = parseInt(game.firstEmojiSelectedPosition.substr(0,1));
         var tempColumn = parseInt(game.firstEmojiSelectedPosition.substr(2,1));
         console.log(tempRow + "x" + tempColumn);
         if (tempRow < 7) {
             $("[position=" + (tempRow + 1) + "x" + tempColumn + "]").addClass('to_be_selected');
+            game.secondEmojiOptions.push([tempRow + 1, tempColumn]);
         }
         if (tempRow > 0) {
             $("[position=" + (tempRow - 1) + "x" + tempColumn + "]").addClass('to_be_selected');
+            game.secondEmojiOptions.push([tempRow - 1, tempColumn]);
         }
         if (tempColumn < 7) {
             $("[position=" + tempRow + "x" + (tempColumn + 1) + "]").addClass('to_be_selected');
+            game.secondEmojiOptions.push([tempRow, tempColumn + 1]);
         }
         if (tempColumn > 0) {
             $("[position=" + tempRow + "x" + (tempColumn - 1) + "]").addClass('to_be_selected');
+            game.secondEmojiOptions.push([tempRow, tempColumn - 1]);
         }
-
-
-
-
-
     },
     secondSelection: function() {
-
-        console.log('in second selection function');
-
-        //Swap the two emojis on the DOM and in the array
-        // switch(game.firstEmojiSelected.position){
-        //     case '7x0':
-        //         if(game.secondEmojiSelected === '7x1' || game.secondEmojiSelected === '6x0'){
-        //             //its the position qualifies for a swap so swap it
-        //             //and do a checkForMatches()
-        //             //game.checkForMatches();
-        //             console.log('first emoji position: '+ game.firstEmojiSelected.outerHTML());
-        //             console.log('secod emoji position: '+ game.secondEmojiSelected);
-        //             //$(firstEmoji).attr("7x1").removeClass('to_be_selected');
-        //             //$(firstEmoji).attr("6x0").removeClass('to_be_selected');
-        //         }else{
-        //             //no swap necessary reset first and second emoji var
-        //             console.log('no swap');
-        //             console.log('first emoji position: '+ firstEmoji);
-        //             console.log('secod emoji position: '+ game.secondEmojiSelected);
-        //             //$(firstEmoji).attr("7x1").removeClass('to_be_selected');
-        //             //$(firstEmoji).attr("6x0").removeClass('to_be_selected');
-        //         }
-        //
-        //         break;
-        //     case '7x1':
-        //         $(emoji).attr("7x0").removeClass('to_be_selected');
-        //         $(emoji).attr("7x2").removeClass('to_be_selected');
-        //         $(emoji).attr("6x1").removeClass('to_be_selected');
-        //         break;
-        //     case '7x2':
-        //         $(emoji).attr("7x1").removeClass('to_be_selected');
-        //         $(emoji).attr("7x3").removeClass('to_be_selected');
-        //         $(emoji).attr("6x2").removeClass('to_be_selected');
-        //         break;
-        //     case '7x3':
-        //         $(emoji).attr("7x2").removeClass('to_be_selected');
-        //         $(emoji).attr("7x4").removeClass('to_be_selected');
-        //         $(emoji).attr("6x3").removeClass('to_be_selected');
-        //         break;
-        //     case '7x4':
-        //         $(emoji).attr("7x3").removeClass('to_be_selected');
-        //         $(emoji).attr("7x5").removeClass('to_be_selected');
-        //         $(emoji).attr("6x4").removeClass('to_be_selected');
-        //         break;
-        //     case '7x5':
-        //         $(emoji).attr("7x4").removeClass('to_be_selected');
-        //         $(emoji).attr("7x6").removeClass('to_be_selected');
-        //         $(emoji).attr("6x5").removeClass('to_be_selected');
-        //         break;
-        //     case '7x6':
-        //         $(emoji).attr("7x5").removeClass('to_be_selected');
-        //         $(emoji).attr("7x7").removeClass('to_be_selected');
-        //         $(emoji).attr("6x6").removeClass('to_be_selected');
-        //         break;
-        //     case '7x7':
-        //         $(emoji).attr("7x6").removeClass('to_be_selected');
-        //         $(emoji).attr("6x7").removeClass('to_be_selected');
-        //         break;
-        //
-        //
-        //
-        //     case '6x0':
-        //         $(emoji).attr("7x0").removeClass('to_be_selected');
-        //         $(emoji).attr("6x1").removeClass('to_be_selected');
-        //         $(emoji).attr("5x0").removeClass('to_be_selected');
-        //         break;
-        //     case '6x1':
-        //         $(emoji).attr("7x1").removeClass('to_be_selected');
-        //         $(emoji).attr("6x0").removeClass('to_be_selected');
-        //         $(emoji).attr("6x2").removeClass('to_be_selected');
-        //         $(emoji).attr("5x1").removeClass('to_be_selected');
-        //         break;
-        //     case '6x2':
-        //         $(emoji).attr("7x2").removeClass('to_be_selected');
-        //         $(emoji).attr("6x1").removeClass('to_be_selected');
-        //         $(emoji).attr("6x3").removeClass('to_be_selected');
-        //         $(emoji).attr("5x2").removeClass('to_be_selected');
-        //         break;
-        //     case '6x3':
-        //         $(emoji).attr("7x3").removeClass('to_be_selected');
-        //         $(emoji).attr("6x2").removeClass('to_be_selected');
-        //         $(emoji).attr("6x4").removeClass('to_be_selected');
-        //         $(emoji).attr("5x3").removeClass('to_be_selected');
-        //         break;
-        //     case '6x4':
-        //         $(emoji).attr("7x4").removeClass('to_be_selected');
-        //         $(emoji).attr("6x3").removeClass('to_be_selected');
-        //         $(emoji).attr("6x5").removeClass('to_be_selected');
-        //         $(emoji).attr("5x4").removeClass('to_be_selected');
-        //         break;
-        //     case '6x5':
-        //         $(emoji).attr("7x5").removeClass('to_be_selected');
-        //         $(emoji).attr("6x4").removeClass('to_be_selected');
-        //         $(emoji).attr("6x6").removeClass('to_be_selected');
-        //         $(emoji).attr("5x5").removeClass('to_be_selected');
-        //         break;
-        //     case '6x6':
-        //         $(emoji).attr("7x6").removeClass('to_be_selected');
-        //         $(emoji).attr("6x5").removeClass('to_be_selected');
-        //         $(emoji).attr("6x7").removeClass('to_be_selected');
-        //         $(emoji).attr("5x6").removeClass('to_be_selected');
-        //         break;
-        //     case '6x7':
-        //         $(emoji).attr("7x7").removeClass('to_be_selected');
-        //         $(emoji).attr("6x6").removeClass('to_be_selected');
-        //         $(emoji).attr("5x7").removeClass('to_be_selected');
-        //         break;
-        //
-        //
-        //     case '5x0':
-        //         $(emoji).attr("4x0").removeClass('to_be_selected');
-        //         $(emoji).attr("5x1").removeClass('to_be_selected');
-        //         $(emoji).attr("6x0").removeClass('to_be_selected');
-        //         break;
-        //     case '5x1':
-        //         $(emoji).attr("6x1").removeClass('to_be_selected');
-        //         $(emoji).attr("5x0").removeClass('to_be_selected');
-        //         $(emoji).attr("5x2").removeClass('to_be_selected');
-        //         $(emoji).attr("4x1").removeClass('to_be_selected');
-        //         break;
-        //     case '5x2':
-        //         $(emoji).attr("6x2").removeClass('to_be_selected');
-        //         $(emoji).attr("5x1").removeClass('to_be_selected');
-        //         $(emoji).attr("5x3").removeClass('to_be_selected');
-        //         $(emoji).attr("4x2").removeClass('to_be_selected');
-        //         break;
-        //     case '5x3':
-        //         $(emoji).attr("6x3").removeClass('to_be_selected');
-        //         $(emoji).attr("5x2").removeClass('to_be_selected');
-        //         $(emoji).attr("5x4").removeClass('to_be_selected');
-        //         $(emoji).attr("4x3").removeClass('to_be_selected');
-        //         break;
-        //     case '5x4':
-        //         $(emoji).attr("6x4").removeClass('to_be_selected');
-        //         $(emoji).attr("5x3").removeClass('to_be_selected');
-        //         $(emoji).attr("5x5").removeClass('to_be_selected');
-        //         $(emoji).attr("4x4").removeClass('to_be_selected');
-        //         break;
-        //     case '5x5':
-        //         $(emoji).attr("6x5").removeClass('to_be_selected');
-        //         $(emoji).attr("5x4").removeClass('to_be_selected');
-        //         $(emoji).attr("5x6").removeClass('to_be_selected');
-        //         $(emoji).attr("4x5").removeClass('to_be_selected');
-        //         break;
-        //     case '5x6':
-        //         $(emoji).attr("6x6").removeClass('to_be_selected');
-        //         $(emoji).attr("5x5").removeClass('to_be_selected');
-        //         $(emoji).attr("5x7").removeClass('to_be_selected');
-        //         $(emoji).attr("4x6").removeClass('to_be_selected');
-        //         break;
-        //     case '5x7':
-        //         $(emoji).attr("6x7").removeClass('to_be_selected');
-        //         $(emoji).attr("5x6").removeClass('to_be_selected');
-        //         $(emoji).attr("4x7").removeClass('to_be_selected');
-        //         break;
-        //
-        //
-        //
-        //
-        //
-        //     case '4x0':
-        //         $(emoji).attr("5x0").addClass('to_be_selected');
-        //         $(emoji).attr("4x1").addClass('to_be_selected');
-        //         $(emoji).attr("3x0").addClass('to_be_selected');
-        //         break;
-        //     case '4x1':
-        //         $(emoji).attr("5x1").addClass('to_be_selected');
-        //         $(emoji).attr("4x0").addClass('to_be_selected');
-        //         $(emoji).attr("4x2").addClass('to_be_selected');
-        //         $(emoji).attr("3x1").addClass('to_be_selected');
-        //         break;
-        //     case '4x2':
-        //         $(emoji).attr("5x2").addClass('to_be_selected');
-        //         $(emoji).attr("4x1").addClass('to_be_selected');
-        //         $(emoji).attr("4x3").addClass('to_be_selected');
-        //         $(emoji).attr("3x2").addClass('to_be_selected');
-        //         break;
-        //     case '4x3':
-        //         $(emoji).attr("5x3").addClass('to_be_selected');
-        //         $(emoji).attr("4x2").addClass('to_be_selected');
-        //         $(emoji).attr("4x4").addClass('to_be_selected');
-        //         $(emoji).attr("3x3").addClass('to_be_selected');
-        //         break;
-        //     case '4x4':
-        //         $(emoji).attr("5x4").addClass('to_be_selected');
-        //         $(emoji).attr("4x3").addClass('to_be_selected');
-        //         $(emoji).attr("4x5").addClass('to_be_selected');
-        //         $(emoji).attr("3x4").addClass('to_be_selected');
-        //         break;
-        //     case '4x5':
-        //         $(emoji).attr("5x5").addClass('to_be_selected');
-        //         $(emoji).attr("4x4").addClass('to_be_selected');
-        //         $(emoji).attr("4x6").addClass('to_be_selected');
-        //         $(emoji).attr("3x5").addClass('to_be_selected');
-        //         break;
-        //     case '4x6':
-        //         $(emoji).attr("5x6").addClass('to_be_selected');
-        //         $(emoji).attr("4x5").addClass('to_be_selected');
-        //         $(emoji).attr("4x7").addClass('to_be_selected');
-        //         $(emoji).attr("3x6").addClass('to_be_selected');
-        //         break;
-        //     case '4x7':
-        //         $(emoji).attr("7x7").addClass('to_be_selected');
-        //         $(emoji).attr("4x6").addClass('to_be_selected');
-        //         $(emoji).attr("5x7").addClass('to_be_selected');
-        //         break;
-        //
-        //
-        //
-        //
-        //     case '3x0':
-        //         $(emoji).attr("4x0").addClass('to_be_selected');
-        //         $(emoji).attr("3x1").addClass('to_be_selected');
-        //         $(emoji).attr("2x0").addClass('to_be_selected');
-        //         break;
-        //     case '3x1':
-        //         $(emoji).attr("4x1").addClass('to_be_selected');
-        //         $(emoji).attr("3x0").addClass('to_be_selected');
-        //         $(emoji).attr("3x2").addClass('to_be_selected');
-        //         $(emoji).attr("2x1").addClass('to_be_selected');
-        //         break;
-        //     case '3x2':
-        //         $(emoji).attr("4x2").addClass('to_be_selected');
-        //         $(emoji).attr("3x1").addClass('to_be_selected');
-        //         $(emoji).attr("3x3").addClass('to_be_selected');
-        //         $(emoji).attr("2x2").addClass('to_be_selected');
-        //         break;
-        //     case '3x3':
-        //         $(emoji).attr("4x3").addClass('to_be_selected');
-        //         $(emoji).attr("3x2").addClass('to_be_selected');
-        //         $(emoji).attr("3x4").addClass('to_be_selected');
-        //         $(emoji).attr("2x3").addClass('to_be_selected');
-        //         break;
-        //     case '3x4':
-        //         $(emoji).attr("4x4").addClass('to_be_selected');
-        //         $(emoji).attr("3x3").addClass('to_be_selected');
-        //         $(emoji).attr("3x5").addClass('to_be_selected');
-        //         $(emoji).attr("2x4").addClass('to_be_selected');
-        //         break;
-        //     case '3x5':
-        //         $(emoji).attr("4x5").addClass('to_be_selected');
-        //         $(emoji).attr("3x4").addClass('to_be_selected');
-        //         $(emoji).attr("3x6").addClass('to_be_selected');
-        //         $(emoji).attr("2x5").addClass('to_be_selected');
-        //         break;
-        //     case '3x6':
-        //         $(emoji).attr("4x6").addClass('to_be_selected');
-        //         $(emoji).attr("3x5").addClass('to_be_selected');
-        //         $(emoji).attr("3x7").addClass('to_be_selected');
-        //         $(emoji).attr("2x6").addClass('to_be_selected');
-        //         break;
-        //     case '3x7':
-        //         $(emoji).attr("4x7").addClass('to_be_selected');
-        //         $(emoji).attr("3x6").addClass('to_be_selected');
-        //         $(emoji).attr("2x7").addClass('to_be_selected');
-        //         break;
-        //
-        //
-        //
-        //
-        //     case '2x0':
-        //         $(emoji).attr("3x0").addClass('to_be_selected');
-        //         $(emoji).attr("2x1").addClass('to_be_selected');
-        //         $(emoji).attr("1x0").addClass('to_be_selected');
-        //         break;
-        //     case '2x1':
-        //         $(emoji).attr("3x1").addClass('to_be_selected');
-        //         $(emoji).attr("2x0").addClass('to_be_selected');
-        //         $(emoji).attr("2x2").addClass('to_be_selected');
-        //         $(emoji).attr("1x1").addClass('to_be_selected');
-        //         break;
-        //     case '2x2':
-        //         $(emoji).attr("3x2").addClass('to_be_selected');
-        //         $(emoji).attr("2x1").addClass('to_be_selected');
-        //         $(emoji).attr("2x3").addClass('to_be_selected');
-        //         $(emoji).attr("1x2").addClass('to_be_selected');
-        //         break;
-        //     case '2x3':
-        //         $(emoji).attr("3x3").addClass('to_be_selected');
-        //         $(emoji).attr("2x2").addClass('to_be_selected');
-        //         $(emoji).attr("2x4").addClass('to_be_selected');
-        //         $(emoji).attr("1x3").addClass('to_be_selected');
-        //         break;
-        //     case '2x4':
-        //         $(emoji).attr("3x4").addClass('to_be_selected');
-        //         $(emoji).attr("2x3").addClass('to_be_selected');
-        //         $(emoji).attr("2x5").addClass('to_be_selected');
-        //         $(emoji).attr("1x4").addClass('to_be_selected');
-        //         break;
-        //     case '2x5':
-        //         $(emoji).attr("3x5").addClass('to_be_selected');
-        //         $(emoji).attr("2x4").addClass('to_be_selected');
-        //         $(emoji).attr("2x6").addClass('to_be_selected');
-        //         $(emoji).attr("1x5").addClass('to_be_selected');
-        //         break;
-        //     case '2x6':
-        //         $(emoji).attr("3x6").addClass('to_be_selected');
-        //         $(emoji).attr("2x5").addClass('to_be_selected');
-        //         $(emoji).attr("2x7").addClass('to_be_selected');
-        //         $(emoji).attr("1x6").addClass('to_be_selected');
-        //         break;
-        //     case '2x7':
-        //         $(emoji).attr("3x7").addClass('to_be_selected');
-        //         $(emoji).attr("2x6").addClass('to_be_selected');
-        //         $(emoji).attr("1x7").addClass('to_be_selected');
-        //         break;
-        //
-        //
-        //
-        //
-        //     case '1x0':
-        //         $(emoji).attr("2x0").addClass('to_be_selected');
-        //         $(emoji).attr("1x1").addClass('to_be_selected');
-        //         $(emoji).attr("0x0").addClass('to_be_selected');
-        //         break;
-        //     case '1x1':
-        //         $(emoji).attr("2x1").addClass('to_be_selected');
-        //         $(emoji).attr("1x0").addClass('to_be_selected');
-        //         $(emoji).attr("1x2").addClass('to_be_selected');
-        //         $(emoji).attr("0x1").addClass('to_be_selected');
-        //         break;
-        //     case '1x2':
-        //         $(emoji).attr("2x2").addClass('to_be_selected');
-        //         $(emoji).attr("1x1").addClass('to_be_selected');
-        //         $(emoji).attr("1x3").addClass('to_be_selected');
-        //         $(emoji).attr("0x2").addClass('to_be_selected');
-        //         break;
-        //     case '1x3':
-        //         $(emoji).attr("2x3").addClass('to_be_selected');
-        //         $(emoji).attr("1x2").addClass('to_be_selected');
-        //         $(emoji).attr("1x4").addClass('to_be_selected');
-        //         $(emoji).attr("0x3").addClass('to_be_selected');
-        //         break;
-        //     case '1x4':
-        //         $(emoji).attr("2x4").addClass('to_be_selected');
-        //         $(emoji).attr("1x3").addClass('to_be_selected');
-        //         $(emoji).attr("1x5").addClass('to_be_selected');
-        //         $(emoji).attr("0x4").addClass('to_be_selected');
-        //         break;
-        //     case '1x5':
-        //         $(emoji).attr("2x5").addClass('to_be_selected');
-        //         $(emoji).attr("1x4").addClass('to_be_selected');
-        //         $(emoji).attr("1x6").addClass('to_be_selected');
-        //         $(emoji).attr("0x5").addClass('to_be_selected');
-        //         break;
-        //     case '1x6':
-        //         $(emoji).attr("2x6").addClass('to_be_selected');
-        //         $(emoji).attr("1x5").addClass('to_be_selected');
-        //         $(emoji).attr("1x7").addClass('to_be_selected');
-        //         $(emoji).attr("0x6").addClass('to_be_selected');
-        //         break;
-        //     case '1x7':
-        //         $(emoji).attr("2x7").addClass('to_be_selected');
-        //         $(emoji).attr("1x6").addClass('to_be_selected');
-        //         $(emoji).attr("0x7").addClass('to_be_selected');
-        //         break;
-        //
-        //
-        //     case '0x0':
-        //         $(emoji).attr("0x1").addClass('to_be_selected');
-        //         $(emoji).attr("1x0").addClass('to_be_selected');
-        //         break;
-        //     case '0x1':
-        //         $(emoji).attr("0x0").addClass('to_be_selected');
-        //         $(emoji).attr("0x2").addClass('to_be_selected');
-        //         $(emoji).attr("1x1").addClass('to_be_selected');
-        //         break;
-        //     case '0x2':
-        //         $(emoji).attr("0x1").addClass('to_be_selected');
-        //         $(emoji).attr("0x3").addClass('to_be_selected');
-        //         $(emoji).attr("1x2").addClass('to_be_selected');
-        //         break;
-        //     case '0x3':
-        //         $(emoji).attr("0x2").addClass('to_be_selected');
-        //         $(emoji).attr("0x4").addClass('to_be_selected');
-        //         $(emoji).attr("1x3").addClass('to_be_selected');
-        //         break;
-        //     case '0x4':
-        //         $(emoji).attr("0x3").addClass('to_be_selected');
-        //         $(emoji).attr("0x5").addClass('to_be_selected');
-        //         $(emoji).attr("1x4").addClass('to_be_selected');
-        //         break;
-        //     case '0x5':
-        //         $(emoji).attr("0x4").addClass('to_be_selected');
-        //         $(emoji).attr("0x6").addClass('to_be_selected');
-        //         $(emoji).attr("1x5").addClass('to_be_selected');
-        //         break;
-        //     case '0x6':
-        //         $(emoji).attr("0x5").addClass('to_be_selected');
-        //         $(emoji).attr("0x7").addClass('to_be_selected');
-        //         $(emoji).attr("1x6").addClass('to_be_selected');
-        //         break;
-        //     case '0x7':
-        //         $(emoji).attr("0x6").addClass('to_be_selected');
-        //         $(emoji).attr("1x7").addClass('to_be_selected');
-        //         break;
-
-
+        var firstPosition = game.firstEmojiSelected.attr('position');
+        var secondPosition = game.secondEmojiSelected.attr('position');
+        var firstRow = firstPosition.substr(0, 1);
+        var firstColumn = firstPosition.substr(2, 1);
+        var secondRow = secondPosition.substr(0, 1);
+        var secondColumn = secondPosition.substr(2,1);
+        var typeofTransition = null;
+        if (firstRow === secondRow) {
+            if (firstColumn > secondColumn) {
+                typeofTransition = ['rightToLeft','leftToRight']
+            } else {
+                typeofTransition = ['leftToRight','rightToLeft']
+            }
+        } else {
+            if (firstRow > secondRow) {
+                typeofTransition = ['topToBottom', 'bottomToTop'];
+            } else {
+                typeofTransition = ['bottomToTop', 'topToBottom'];
+            }
         }
-
-        //game.checkForMatches(); //Check to see if a match was made.
-
-        //game.firstEmojiSelected = null; //Re-Initialize the firstSelection boolean
-    ,
+        var tempDomHolder = ($(game.firstEmojiSelected).find('img'));
+        game.firstEmojiSelected.empty().append(game.secondEmojiSelected.find('img').css('animation', typeofTransition[1] + "Swap .4s linear"));
+        game.secondEmojiSelected.empty().append(tempDomHolder).css('animation', typeofTransition[0] + "Swap .4s linear");
+        var tempArrayHolder = game.gameMap[firstColumn][firstRow];
+        game.gameMap[firstColumn][firstRow] = game.gameMap[secondColumn][secondRow];
+        game.gameMap[secondColumn][secondRow] = tempArrayHolder;
+        $('div').removeClass('selected to_be_selected');
+        game.firstEmojiSelected = null;
+        game.secondEmojiSelected = null;
+        game.checkForMatches();
+    },
     checkForMatches: function() {
         var tempHoldImg = null;
         var tempHoldImg2 = null;
@@ -664,7 +292,6 @@ var game = {
         }
     }
 };
-
 function Emoji(name) {
     this.name = name;
 }
@@ -684,6 +311,10 @@ $(document).ready(function () {
                 $('#winOrLose').text('Sorry, You Lost!')
             }
             $('#endGameOverlay').css('display','block');
+            $('.resetButton').on('click', function() {
+                $('#endGameOverlay').hide();
+                game.reset();
+            })
         }, 63000);
     });
 });
